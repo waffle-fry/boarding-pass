@@ -3,10 +3,10 @@ import "./styles.scss";
 
 function EmailInput(props) {
   return (
-    <div className="EmailInputContainer">
+    <div className="email-input">
       <input
         type="email"
-        className="EmailInput"
+        className="input"
         placeholder={`Enter your ${props.email_address} email address`}
         value={props.value}
         onChange={(text) => props.handleChange(text)}

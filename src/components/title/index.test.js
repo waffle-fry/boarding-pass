@@ -7,5 +7,5 @@ test("renders text with correct classname", () => {
   const title = getByText("This is a Title");
 
   expect(title).toBeInTheDocument();
-  expect(title.className).toBe("Title-Text");
+  expect(title.className).toBe("title");
 });

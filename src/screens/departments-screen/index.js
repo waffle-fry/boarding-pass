@@ -3,6 +3,7 @@ import ActionButton from "../../components/action-button";
 import Header from "../../components/header";
 import data from "../../data.json";
 import { exec, spawn } from "child_process";
+import "./styles.scss";
 
 function DepartmentsScreen() {
   const [state, setState] = useState(null);
@@ -44,7 +45,7 @@ function DepartmentsScreen() {
   }
 
   return (
-    <div className="Container">
+    <div className="container">
       <Header logo={state.logo} title="Choose your department" />
       <ActionButton value="Do Stuff" handleClick={doStuff} />
     </div>

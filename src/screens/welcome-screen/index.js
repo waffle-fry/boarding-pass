@@ -19,8 +19,8 @@ function WelcomeScreen(props) {
   }
 
   return (
-    <div className="Container">
-      <div className="Header">
+    <div className="welcome-container">
+      <div className="header">
         <img
           src={state.logo}
           className="Logo"
@@ -30,7 +30,7 @@ function WelcomeScreen(props) {
         <Title text={state.welcome_title} />
         <Subtitle text={state.welcome_subtitle} />
       </div>
-      <div className="Content">
+      <div className="content">
         <EmailInput email_address={state.email_address} />
         <Link to="/departments">
           <ActionButton value="Get Started" />

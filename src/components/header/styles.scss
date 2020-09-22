@@ -1,17 +1,18 @@
-.Header-Container {
+.header {
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
+  // flex: 1;
 
-.Header-Logo {
-  height: 10vh;
-  object-fit: contain;
-}
+  .logo {
+    height: 10vh;
+    object-fit: contain;
+  }
 
-.Header-Title-Text {
-  font-size: 4vh;
-  text-align: center;
-  margin-top: 1vh;
-  color: #004a8f;
+  .title {
+    font-size: 4vh;
+    text-align: center;
+    margin-top: 1vh;
+    color: #004a8f;
+  }
 }

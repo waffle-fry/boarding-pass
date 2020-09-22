@@ -3,10 +3,10 @@ import "./styles.scss";
 
 function ActionButton(props) {
   return (
-    <div className="ActionButtonContainer">
+    <div className="action-button">
       <input
         type="button"
-        className="ActionButton"
+        className="button"
         value={props.value}
         onClick={props.handleClick}
       />

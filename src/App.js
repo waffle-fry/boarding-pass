@@ -7,7 +7,7 @@ import DepartmentsScreen from "./screens/departments-screen";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Switch>
           <Route path="/departments">
             <DepartmentsScreen />

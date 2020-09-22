@@ -3,9 +3,9 @@ import "./styles.scss";
 
 function Header(props) {
   return (
-    <div className="Header-Container">
-      <img src={props.logo} className="Header-Logo" alt="logo" />
-      <div className="Header-Title-Text">{props.title}</div>
+    <div className="header">
+      <img src={props.logo} className="logo" alt="logo" />
+      <div className="title">{props.title}</div>
     </div>
   );
 }

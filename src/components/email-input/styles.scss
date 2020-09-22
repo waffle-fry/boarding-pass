@@ -1,16 +1,16 @@
-.EmailInputContainer {
+.email-input {
   display: flex;
   justify-content: center;
-}
 
-.EmailInput {
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom-width: 0.2vh;
-  border-bottom-color: #004a8f;
-  text-align: center;
-  font-size: 2.25vh;
-  flex: 0.4;
-  padding-bottom: 0.5vh;
+  .input {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom-width: 0.2vh;
+    border-bottom-color: #004a8f;
+    text-align: center;
+    font-size: 2.25vh;
+    flex: 0.4;
+    padding-bottom: 0.5vh;
+  }
 }

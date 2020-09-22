@@ -1,19 +1,19 @@
-.Container {
+.welcome-container {
   display: flex;
   flex: 1;
   flex-direction: column;
-}
 
-.Header {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  flex-direction: column;
-}
+  .header {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+  }
 
-.Content {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  flex-direction: column;
+  .content {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
