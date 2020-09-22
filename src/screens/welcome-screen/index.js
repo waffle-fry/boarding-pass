@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Subtitle from "../../components/subtitle";
 import Title from "../../components/title";
-import "./styles.scss";
+import styles from "./styles.scss";
 import EmailInput from "../../components/email-input";
 import ActionButton from "../../components/action-button";
 import data from "../../data.json";
@@ -19,18 +19,18 @@ function WelcomeScreen(props) {
   }
 
   return (
-    <div className="welcome-container">
-      <div className="header">
+    <div className={styles.container}>
+      <div className={styles.header}>
         <img
           src={state.logo}
           className="Logo"
           alt="logo"
-          style={{ height: "12.5vh", objectFit: "contain" }}
+          className={styles.logo}
         />
         <Title text={state.welcome_title} />
         <Subtitle text={state.welcome_subtitle} />
       </div>
-      <div className="content">
+      <div className={styles.content}>
         <EmailInput email_address={state.email_address} />
         <Link to="/departments">
           <ActionButton value="Get Started" />

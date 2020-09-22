@@ -1,4 +1,4 @@
-.welcome-container {
+.container {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -8,6 +8,11 @@
     flex: 1;
     justify-content: center;
     flex-direction: column;
+
+    .logo {
+      height: 12.5vh;
+      object-fit: contain
+    }
   }
 
   .content {

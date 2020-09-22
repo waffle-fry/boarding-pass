@@ -1,11 +1,11 @@
 import React from "react";
-import "./styles.scss";
+import styles from "./styles.scss";
 
 function Header(props) {
   return (
-    <div className="header">
-      <img src={props.logo} className="logo" alt="logo" />
-      <div className="title">{props.title}</div>
+    <div className={styles.header}>
+      <img src={props.logo} className={styles.logo} alt="logo" />
+      <div className={styles.title}>{props.title}</div>
     </div>
   );
 }

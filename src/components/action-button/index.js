@@ -1,12 +1,12 @@
 import React from "react";
-import "./styles.scss";
+import styles from "./styles.scss";
 
 function ActionButton(props) {
   return (
-    <div className="action-button">
+    <div className={styles.action_button}>
       <input
         type="button"
-        className="button"
+        className={styles.button}
         value={props.value}
         onClick={props.handleClick}
       />
