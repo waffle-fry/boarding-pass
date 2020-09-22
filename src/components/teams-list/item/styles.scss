@@ -1,0 +1,18 @@
+.container {
+  flex: 0 0 33%;
+
+  .link {
+    text-decoration: none;
+  }
+
+  .card {
+    box-shadow: 0 0.4vh 1vh 0 rgba(0, 0, 0, 0.15);
+    padding: 2vh;
+    margin: 1vh;
+
+    .name {
+      color: #004a8f;
+      font-size: 2.5vh;
+    }
+  }
+}

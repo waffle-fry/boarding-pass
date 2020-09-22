@@ -3,5 +3,11 @@
   "company_name": "Nationwide",
   "email_address": "@nationwide.co.uk",
   "welcome_title": "Welcome to Nationwide",
-  "welcome_subtitle": "We're thrilled to have you"
+  "welcome_subtitle": "We're thrilled to have you",
+  "teams": [
+    { "name": "Izumi", "slug": "izumi" },
+    { "name": "Quantum Pipes", "slug": "quantum-pipes" },
+    { "name": "Landing Zone", "slug": "landing-zone" },
+    { "name": "Test", "slug": "test" }
+  ]
 }

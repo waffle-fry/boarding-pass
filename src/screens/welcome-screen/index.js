@@ -32,7 +32,7 @@ function WelcomeScreen(props) {
       </div>
       <div className={styles.content}>
         <EmailInput email_address={state.email_address} />
-        <Link to="/departments">
+        <Link to="/teams">
           <ActionButton value="Get Started" />
         </Link>
       </div>
