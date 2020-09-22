@@ -33,6 +33,14 @@ module.exports = {
         include: defaultInclude,
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: "react-hot-loader/webpack" },
+          { loader: "babel-loader" },
+        ],
+      },
+      {
         test: /\.(jpe?g|png|gif)$/,
         use: [{ loader: "file-loader?name=img/[name]__[hash:base64:5].[ext]" }],
         include: defaultInclude,
@@ -56,6 +64,7 @@ module.exports = {
   devtool: "cheap-source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
+    historyApiFallback: true,
     stats: {
       colors: true,
       chunks: false,
