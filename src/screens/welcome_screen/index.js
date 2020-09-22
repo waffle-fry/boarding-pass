@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Subtitle from "../../components/subtitle";
 import Title from "../../components/title";
-import "./styles.css";
+import "./styles.scss";
 import EmailInput from "../../components/email_input";
 import ActionButton from "../../components/action_button";
 import data from "./../../data.json";
