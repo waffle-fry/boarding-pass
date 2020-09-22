@@ -1,0 +1,17 @@
+.Header-Container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Header-Logo {
+  height: 10vh;
+  object-fit: contain;
+}
+
+.Header-Title-Text {
+  font-size: 4vh;
+  text-align: center;
+  margin-top: 1vh;
+  color: #004a8f;
+}
