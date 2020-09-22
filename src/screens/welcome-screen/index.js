@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Subtitle from "../../components/subtitle";
 import Title from "../../components/title";
 import "./styles.scss";
-import EmailInput from "../../components/email_input";
-import ActionButton from "../../components/action_button";
-import data from "./../../data.json";
+import EmailInput from "../../components/email-input";
+import ActionButton from "../../components/action-button";
+import data from "../../data.json";
 import { Link } from "react-router-dom";
 
 function WelcomeScreen(props) {
