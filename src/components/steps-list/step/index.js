@@ -21,8 +21,8 @@ function Step(props) {
         </div>
       </div>
       <div className={styles.action_button}>
-        {props.terminal.action_button.enabled && (
-          <SecondaryButton value={props.terminal.action_button.title} />
+        {props.action_button.enabled && (
+          <SecondaryButton value={props.action_button.title} />
         )}
       </div>
     </div>

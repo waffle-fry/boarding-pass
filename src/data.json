@@ -38,11 +38,11 @@
                     "title": "Git",
                     "command": ""
                   }
-                ],
-                "action_button": {
-                  "enabled": true,
-                  "title": "Install All"
-                }
+                ]
+              },
+              "action_button": {
+                "enabled": true,
+                "title": "Install All"
               }
             }
           ]
