@@ -3,7 +3,7 @@ import ActionButton from "../../components/action-button";
 import Header from "../../components/header";
 import data from "../../data.json";
 import styles from "./styles.scss";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import StepsList from "../../components/steps-list";
 
 function StagesScreen() {
@@ -30,6 +30,9 @@ function StagesScreen() {
         subtitle={currentStage.title}
       />
       <StepsList steps={currentStage.steps} />
+      <Link to={`/team/${team}/${stage}`}>
+        <ActionButton value="Continue" />
+      </Link>
     </div>
   );
 }
