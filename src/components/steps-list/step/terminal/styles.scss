@@ -1,0 +1,16 @@
+  .terminal {
+    background-color: #403E3E;
+    color: #FFFFFF;
+    margin-top: 1vh;
+
+    .commands {
+      margin: 1vh;
+      padding: 1vh;
+      font-size: 1.8vh;
+
+      .command {
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+      }
+    }
+  }

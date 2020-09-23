@@ -16,15 +16,7 @@ function Step(props) {
           <div className={styles.content_container}>
             <div className={styles.title}>{props.title}</div>
             <div className={styles.text}>{props.text}</div>
-            <div className={styles.terminal}>
-              <div className={styles.commands}>
-                {props.terminal.commands.map((terminal) => (
-                  <div
-                    className={styles.command}
-                  >{`${terminal.title}: ${terminal.command}`}</div>
-                ))}
-              </div>
-            </div>
+            {props.additional_view}
           </div>
         </div>
       </div>
