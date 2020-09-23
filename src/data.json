@@ -5,8 +5,50 @@
   "welcome_title": "Welcome to Nationwide",
   "welcome_subtitle": "We're thrilled to have you",
   "teams": [
-    { "name": "Izumi", "slug": "izumi" },
-    { "name": "Quantum Pipes", "slug": "quantum-pipes" },
+    {
+      "name": "Izumi",
+      "slug": "izumi"
+    },
+    {
+      "name": "Quantum Pipes",
+      "slug": "quantum-pipes",
+      "stages": [
+        {
+          "title": "Step One: Terminal Setup",
+          "steps": [
+            {
+              "type": "terminal",
+              "title": "Setup Your Terminal",
+              "text": "It’s recommended that you install the following to complete the onboarding process:",
+              "terminal": {
+                "commands": [
+                  {
+                    "title": "Homebrew",
+                    "command": "/bin/bash -c “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+                  },
+                  {
+                    "title": "AWS CLI",
+                    "command": ""
+                  },
+                  {
+                    "title": "Kubectl",
+                    "command": ""
+                  },
+                  {
+                    "title": "Git",
+                    "command": ""
+                  }
+                ],
+                "action_button": {
+                  "enabled": true,
+                  "title": "Install All"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
     { "name": "Landing Zone", "slug": "landing-zone" },
     { "name": "Test", "slug": "test" }
   ]
