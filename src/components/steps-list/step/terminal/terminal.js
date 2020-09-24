@@ -7,6 +7,7 @@ function Terminal(props) {
       <div className={styles.commands}>
         {props.commands.map((command) => (
           <div
+            key={`command-${command}`}
             className={styles.command}
           >{`${command.title}: ${command.command}`}</div>
         ))}

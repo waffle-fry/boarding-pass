@@ -7,7 +7,7 @@ function StepsList(props) {
   return (
     <div className={styles.container}>
       {props.steps.map((step, index) => (
-        <TerminalStep {...step} number={index + 1} />
+        <TerminalStep {...step} key={`step-${index}`} number={index + 1} />
       ))}
     </div>
   );
