@@ -21,7 +21,12 @@ function Step(props) {
       </div>
       <div className={styles.action_button}>
         {props.action_button.enabled && (
-          <SecondaryButton value={props.action_button.title} />
+          <SecondaryButton
+            value={
+              props.action_running ? "Loading..." : props.action_button.title
+            }
+            handleClick={props.handle_action_button}
+          />
         )}
       </div>
     </div>
