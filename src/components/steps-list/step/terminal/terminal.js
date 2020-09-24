@@ -5,7 +5,7 @@ function Terminal(props) {
   return (
     <div className={styles.terminal}>
       <div className={styles.commands}>
-        {props.terminal.commands.map((command) => (
+        {props.commands.map((command) => (
           <div
             className={styles.command}
           >{`${command.title}: ${command.command}`}</div>

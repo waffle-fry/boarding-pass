@@ -15,7 +15,7 @@ function TerminalStep(props) {
     <Step
       {...props}
       icon={faTerminal}
-      additional_view={<Terminal {...props} />}
+      additional_view={<Terminal {...props.terminal} />}
       action_running={actionRunning}
       handle_action_button={handleActionButton}
     />
