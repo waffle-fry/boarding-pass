@@ -1,6 +1,5 @@
   .terminal {
     background-color: #403E3E;
-    color: #FFFFFF;
     margin-top: 1vh;
 
     .commands {
@@ -8,9 +7,27 @@
       padding: 1vh;
       font-size: 1.8vh;
 
+      .running_spinner {
+        margin-right: 0.5vh;
+        color: #FFFFFF;
+      }
+
       .command {
         margin-top: 0.5vh;
         margin-bottom: 0.5vh;
+        color: #FFFFFF;
+      }
+
+      .command_success {
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+        color: green;
+      }
+
+      .command_error {
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+        color: red;
       }
     }
   }
