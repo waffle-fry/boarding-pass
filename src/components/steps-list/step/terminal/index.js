@@ -46,24 +46,34 @@ function TerminalStep(props) {
   function handleActionButton() {
     setActionRunning(true);
 
-    commands.forEach(({ command }, index) => {
-      setCommand(index, "running", true);
+    commands.forEach(({ command, success, error }, index) => {
+      new Promise((resolve, reject) => {
+        if (!success && !error) {
+          setCommand(index, "running", true);
+          exec(command, (error, stdout, stderr) => {
+            if (error) {
+              reject(error.message);
+              return;
+            }
+            if (stderr) {
+              reject(stderr);
+              return;
+            }
 
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          setCommand(index, "error", true);
-          console.log(`error: ${error.message}`);
-          return;
+            resolve(stdout);
+          });
+        } else {
+          resolve("Already run");
         }
-        if (stderr) {
+      })
+        .then((stdout) => {
+          console.log(`stdout: ${stdout}`);
+          setCommand(index, "success", true);
+        })
+        .catch((error) => {
+          console.log(`error: ${error}`);
           setCommand(index, "error", true);
-          console.log(`stderr: ${stderr}`);
-          return;
-        }
-
-        setCommand(index, "success", true);
-        console.log(`stdout: ${stdout}`);
-      });
+        });
     });
   }
 
