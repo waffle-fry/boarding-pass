@@ -6,7 +6,7 @@ function TeamsList(props) {
   return (
     <div className={styles.container}>
       {props.teams.map((team) => (
-        <TeamsListItem {...team} />
+        <TeamsListItem {...team} key={`team-${team.slug}`} />
       ))}
     </div>
   );
