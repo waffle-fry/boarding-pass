@@ -3,7 +3,7 @@ import ActionButton from "../../components/action-button";
 import Header from "../../components/header";
 import data from "../../data.json";
 import styles from "./styles.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StepsList from "../../components/steps-list";
 
 function StagesScreen() {
@@ -17,9 +17,7 @@ function StagesScreen() {
     return "Loading...";
   }
 
-  // let { team, stage } = useParams();
-  let team = "quantum-pipes";
-  let stage = 1;
+  let { team, stage } = useParams();
   let teamDetails = state.teams.find((teamDetail) => teamDetail.slug == team);
   let currentStage = teamDetails.stages[stage - 1];
   return (
@@ -30,7 +28,7 @@ function StagesScreen() {
         subtitle={currentStage.title}
       />
       <StepsList steps={currentStage.steps} />
-      <Link to={`/team/${team}/${stage}`}>
+      <Link to={`/team/${team}/${parseInt(stage) + 1}`}>
         <ActionButton value="Continue" />
       </Link>
     </div>
