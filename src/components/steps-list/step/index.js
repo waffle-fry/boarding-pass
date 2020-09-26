@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SecondaryButton from "../../secondary-button";
+import SecondaryIconButton from "../../secondary-button/icon";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function Step(props) {
   return (
@@ -20,14 +22,19 @@ function Step(props) {
         </div>
       </div>
       <div className={styles.action_button}>
-        {props.action_button.enabled && (
-          <SecondaryButton
-            value={
-              props.action_running ? "Loading..." : props.action_button.title
-            }
-            handleClick={props.handle_action_button}
-          />
-        )}
+        {props.action_button.enabled &&
+          (!props.action_running ? (
+            <SecondaryButton
+              value={props.action_button.title}
+              handleClick={props.handle_action_button}
+            />
+          ) : (
+            <SecondaryIconButton
+              icon={faSpinner}
+              spin={true}
+              handleClick={props.handle_action_button}
+            />
+          ))}
       </div>
     </div>
   );
