@@ -12,15 +12,14 @@
 
 .stage_number {
   display: flex;
-  justify-self: center;
+  justify-content: center;
   align-self: center;
+  align-items: center;
   background-color: #004a8f;
   color: #FFFFFF;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  padding-left: 1.75vh;
-  padding-right: 1.75vh;
-  border-radius: 100vh;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 100%;
   margin-right: 2.5vh;
 }
 
