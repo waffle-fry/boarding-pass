@@ -23,20 +23,12 @@
               "terminal": {
                 "commands": [
                   {
-                    "title": "Homebrew",
-                    "command": "/bin/bash -c “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+                    "title": "Docker",
+                    "command": "docker pull busybox"
                   },
                   {
-                    "title": "AWS CLI",
-                    "command": ""
-                  },
-                  {
-                    "title": "Kubectl",
-                    "command": ""
-                  },
-                  {
-                    "title": "Git",
-                    "command": ""
+                    "title": "Docker",
+                    "command": "docker pull helloworld"
                   }
                 ]
               },
@@ -44,6 +36,26 @@
                 "enabled": true,
                 "title": "Install All"
               }
+            }
+          ]
+        },
+        {
+          "title": "Step Two: VPN Access",
+          "steps": [
+            {
+              "type": "download",
+              "title": "Install Tunnelblick",
+              "text": "Open the Mac Self Service app to find the Tunnelblick install."
+            },
+            {
+              "type": "open",
+              "title": "Open the profile included with your login details",
+              "text": "This will install it into Tunnelblick"
+            },
+            {
+              "type": "text-input",
+              "title": "Connect with the profile",
+              "text": "You’ll be prompted to enter the username and password you’ve been emailed - be sure to tick “save in keychain”."
             }
           ]
         }
