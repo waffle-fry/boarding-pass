@@ -1,6 +1,9 @@
 .outer_container {
   display: flex;
   flex-direction: column;
+  padding-bottom: 10vh;
+  min-width: 100vh;
+  max-width: 100vh;
 }
 
 .step_container {
@@ -35,7 +38,6 @@
     padding: 3.5vh;
     align-items: center;
     display: flex;
-    flex: 1;
 
     .icon {
       color: #FFFFFF;
