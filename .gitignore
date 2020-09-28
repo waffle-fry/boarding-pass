@@ -8,6 +8,7 @@ builds/
 dist/
 node_modules/
 *.compiled.*
+coverage/
 
 # Folder config file #
 ######################
@@ -52,4 +53,3 @@ ehthumbs.db
 # Windows shortcuts #
 #####################
 *.lnk
-coverage/
