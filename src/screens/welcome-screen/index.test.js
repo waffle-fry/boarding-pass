@@ -1,61 +1,81 @@
 import React from "react";
-import { getByAltText, render } from "@testing-library/react";
 import WelcomeScreen from "./index";
+import { unmountComponentAtNode } from "react-dom";
+import { getByAltText, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-test("renders logo", () => {
-  const { getByAltText } = render(
+let container = null;
+beforeEach(() => {
+  // setup a DOM element as a render target
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+test("it renders the logo", () => {
+  render(
     <Router>
       <WelcomeScreen />
-    </Router>
+    </Router>,
+    container
   );
-  const logo = getByAltText("logo");
+
+  const logo = document.querySelector(".logo");
 
   expect(logo).toBeInTheDocument();
+  expect(logo.getAttribute("src")).toBe(
+    "https://dynl.mktgcdn.com/p/jPpU9bYhzEYWnQ2poYw1EIYj9ha4ySR9guujLOLODIc/400x400.jpg"
+  );
 });
 
-test("renders welcome message", () => {
-  const { getByText } = render(
+test("it renders the title", () => {
+  render(
     <Router>
       <WelcomeScreen />
-    </Router>
+    </Router>,
+    container
   );
-  const title = getByText("Welcome to Nationwide");
+
+  const title = document.querySelector(".title");
 
   expect(title).toBeInTheDocument();
+  expect(title.textContent).toBe("Welcome to Nationwide");
 });
 
-test("renders subtitle", () => {
-  const { getByText } = render(
+test("it renders the subtitle", () => {
+  render(
     <Router>
       <WelcomeScreen />
-    </Router>
+    </Router>,
+    container
   );
-  const subtitle = getByText("We're thrilled to have you");
+
+  const subtitle = document.querySelector(".subtitle");
 
   expect(subtitle).toBeInTheDocument();
+  expect(subtitle.textContent).toBe("We're thrilled to have you");
 });
 
-test("renders email input", () => {
-  const { getByPlaceholderText } = render(
+test("it renders the action button", () => {
+  render(
     <Router>
       <WelcomeScreen />
-    </Router>
-  );
-  const emailInput = getByPlaceholderText(
-    "Enter your @nationwide.co.uk email address"
+    </Router>,
+    container
   );
 
-  expect(emailInput).toBeInTheDocument();
-});
+  const link = document.querySelector("a");
+  const button = document.querySelector(".button");
 
-test("renders action button", () => {
-  const { getByText } = render(
-    <Router>
-      <WelcomeScreen />
-    </Router>
-  );
-  const actionButton = getByText("Get Started");
+  expect(link).toBeInTheDocument();
+  expect(link.getAttribute("href")).toBe("/teams");
 
-  expect(actionButton).toBeInTheDocument();
+  expect(button).toBeInTheDocument();
+  expect(button.value).toBe("Get Started");
 });
