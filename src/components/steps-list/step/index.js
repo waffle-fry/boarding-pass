@@ -9,7 +9,7 @@ function Step(props) {
   return (
     <div className={styles.outer_container}>
       <div className={styles.step_container}>
-        <div className={styles.stage_number}>{props.number}</div>
+        <div className={styles.step_number}>{props.number}</div>
         <div className={styles.container}>
           <div className={styles.icon_container}>
             <FontAwesomeIcon icon={props.icon} className={styles.icon} />

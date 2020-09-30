@@ -34,7 +34,7 @@ function StepsList(props) {
               />
             );
 
-          case "open":
+          case "open-folder":
             return (
               <Step
                 {...step}
