@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import Subtitle from "../../components/subtitle";
 import Title from "../../components/title";
 import styles from "./styles.scss";
-import ActionButton from "../../components/action-button";
 import data from "../../data.json";
-import { Link } from "react-router-dom";
+import ActionLinkButton from "../../components/action-button/link";
 
 function WelcomeScreen(props) {
   const [state, setState] = useState(null);
@@ -30,9 +29,7 @@ function WelcomeScreen(props) {
         <Subtitle text={state.welcome_subtitle} />
       </div>
       <div className={styles.content}>
-        <Link to="/teams">
-          <ActionButton value="Get Started" />
-        </Link>
+        <ActionLinkButton to="/teams" value="Get Started" />
       </div>
     </div>
   );

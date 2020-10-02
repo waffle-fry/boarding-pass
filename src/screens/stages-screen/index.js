@@ -5,6 +5,7 @@ import data from "../../data.json";
 import styles from "./styles.scss";
 import { Link, useParams } from "react-router-dom";
 import StepsList from "../../components/steps-list";
+import ActionLinkButton from "../../components/action-button/link";
 
 function StagesScreen() {
   const [state, setState] = useState(null);
@@ -28,9 +29,10 @@ function StagesScreen() {
         subtitle={currentStage.title}
       />
       <StepsList steps={currentStage.steps} />
-      <Link to={`/team/${team}/${parseInt(stage) + 1}`}>
-        <ActionButton value="Continue" />
-      </Link>
+      <ActionLinkButton
+        to={`/team/${team}/${parseInt(stage) + 1}`}
+        value="Continue"
+      />
     </div>
   );
 }

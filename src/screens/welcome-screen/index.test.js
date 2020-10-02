@@ -70,12 +70,10 @@ test("it renders the action button", () => {
     container
   );
 
-  const link = document.querySelector("a");
   const button = document.querySelector(".button");
 
-  expect(link).toBeInTheDocument();
-  expect(link.getAttribute("href")).toBe("/teams");
+  expect(button.getAttribute("href")).toBe("/teams");
 
   expect(button).toBeInTheDocument();
-  expect(button.value).toBe("Get Started");
+  expect(button.textContent).toBe("Get Started");
 });
