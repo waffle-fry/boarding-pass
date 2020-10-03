@@ -6,6 +6,7 @@ import styles from "./styles.scss";
 import { Link, useParams } from "react-router-dom";
 import StepsList from "../../components/steps-list";
 import ActionLinkButton from "../../components/action-button/link";
+import Message from "../../components/message";
 
 function StagesScreen() {
   const [state, setState] = useState(null);
@@ -28,6 +29,7 @@ function StagesScreen() {
         title={teamDetails.name}
         subtitle={currentStage.title}
       />
+      {"message" in currentStage && <Message {...currentStage.message} />}
       <StepsList steps={currentStage.steps} />
       <ActionLinkButton
         to={`/team/${team}/${parseInt(stage) + 1}`}
