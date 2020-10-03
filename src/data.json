@@ -41,6 +41,10 @@
         },
         {
           "title": "Step Two: VPN Access",
+          "message": {
+            "title": "CHECK YOUR EMAIL",
+            "text": "Joe Blogs (joe.blogs@nationwide.co.uk) should have sent you an email with your VPN login details. If not, you’ll need to get in touch with them."
+          },
           "steps": [
             {
               "type": "download",
