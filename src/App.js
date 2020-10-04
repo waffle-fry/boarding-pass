@@ -4,20 +4,30 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes";
 import AppContext from "./contexts/AppContext";
 import data from "./data.json";
+import useAxios from "axios-hooks";
+import LoadingScreen from "./screens/loading-screen";
 
 function App() {
-  const [app, setApp] = useState({});
+  const [{ data, loading, error }, refetch] = useAxios("");
 
-  useEffect(() => {
-    setApp(data);
-  });
+  if (
+    loading ||
+    error ||
+    !(data !== undefined && data !== null && data.constructor == Object)
+  ) {
+    const configMalformed = !loading && !error;
 
-  if (app == null) {
-    return "Loading...";
+    return (
+      <LoadingScreen
+        error={error}
+        retry={refetch}
+        config_malformed={configMalformed}
+      />
+    );
   }
 
   return (
-    <AppContext.Provider value={app}>
+    <AppContext.Provider value={data}>
       <Router>
         <div className={styles.app}>
           <Routes />
