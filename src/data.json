@@ -52,7 +52,7 @@
               "text": "Open the Mac Self Service app to find the Tunnelblick install."
             },
             {
-              "type": "open",
+              "type": "open-folder",
               "title": "Open the profile included with your login details",
               "text": "This will install it into Tunnelblick"
             },
