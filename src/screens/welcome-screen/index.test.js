@@ -3,6 +3,8 @@ import WelcomeScreen from "./index";
 import { unmountComponentAtNode } from "react-dom";
 import { getByAltText, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
+import data from "../../data.json";
 
 let container = null;
 beforeEach(() => {
@@ -20,9 +22,11 @@ afterEach(() => {
 
 test("it renders the logo", () => {
   render(
-    <Router>
-      <WelcomeScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <WelcomeScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
@@ -36,9 +40,11 @@ test("it renders the logo", () => {
 
 test("it renders the title", () => {
   render(
-    <Router>
-      <WelcomeScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <WelcomeScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
@@ -50,9 +56,11 @@ test("it renders the title", () => {
 
 test("it renders the subtitle", () => {
   render(
-    <Router>
-      <WelcomeScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <WelcomeScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
@@ -64,9 +72,11 @@ test("it renders the subtitle", () => {
 
 test("it renders the action button", () => {
   render(
-    <Router>
-      <WelcomeScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <WelcomeScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 

@@ -3,6 +3,8 @@ import TeamsScreen from "./index";
 import { unmountComponentAtNode } from "react-dom";
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
+import data from "../../data.json";
 
 let container = null;
 beforeEach(() => {
@@ -20,9 +22,11 @@ afterEach(() => {
 
 test("it renders the header", () => {
   render(
-    <Router>
-      <TeamsScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <TeamsScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
@@ -39,9 +43,11 @@ test("it renders the header", () => {
 
 test("it renders the teams list", () => {
   render(
-    <Router>
-      <TeamsScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <TeamsScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 

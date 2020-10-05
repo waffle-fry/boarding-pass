@@ -3,6 +3,8 @@ import StagesScreen from "./index";
 import { unmountComponentAtNode } from "react-dom";
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
+import data from "../../data.json";
 
 let container = null;
 beforeEach(() => {
@@ -25,9 +27,11 @@ jest.mock("react-router-dom", () => ({
 
 test("it renders the header", () => {
   render(
-    <Router>
-      <StagesScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <StagesScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
@@ -46,9 +50,11 @@ test("it renders the header", () => {
 
 test("it renders the steps list", () => {
   render(
-    <Router>
-      <StagesScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <StagesScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
@@ -60,9 +66,11 @@ test("it renders the steps list", () => {
 
 test("it renders the action button", () => {
   render(
-    <Router>
-      <StagesScreen />
-    </Router>,
+    <AppContext.Provider value={data}>
+      <Router>
+        <StagesScreen />
+      </Router>
+    </AppContext.Provider>,
     container
   );
 
