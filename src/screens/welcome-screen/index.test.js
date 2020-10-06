@@ -33,9 +33,7 @@ test("it renders the logo", () => {
   const logo = document.querySelector(".logo");
 
   expect(logo).toBeInTheDocument();
-  expect(logo.getAttribute("src")).toBe(
-    "https://dynl.mktgcdn.com/p/jPpU9bYhzEYWnQ2poYw1EIYj9ha4ySR9guujLOLODIc/400x400.jpg"
-  );
+  expect(logo.getAttribute("src")).toBe(data.logo);
 });
 
 test("it renders the title", () => {
@@ -51,7 +49,7 @@ test("it renders the title", () => {
   const title = document.querySelector(".title");
 
   expect(title).toBeInTheDocument();
-  expect(title.textContent).toBe("Welcome to Nationwide");
+  expect(title.textContent).toBe(data.welcome_title);
 });
 
 test("it renders the subtitle", () => {
@@ -67,7 +65,7 @@ test("it renders the subtitle", () => {
   const subtitle = document.querySelector(".subtitle");
 
   expect(subtitle).toBeInTheDocument();
-  expect(subtitle.textContent).toBe("We're thrilled to have you");
+  expect(subtitle.textContent).toBe(data.welcome_subtitle);
 });
 
 test("it renders the action button", () => {

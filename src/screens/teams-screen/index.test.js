@@ -35,9 +35,7 @@ test("it renders the header", () => {
   const title = document.querySelector(".title");
 
   expect(header).toBeInTheDocument();
-  expect(logo.getAttribute("src")).toBe(
-    "https://dynl.mktgcdn.com/p/jPpU9bYhzEYWnQ2poYw1EIYj9ha4ySR9guujLOLODIc/400x400.jpg"
-  );
+  expect(logo.getAttribute("src")).toBe(data.logo);
   expect(title.textContent).toBe("Choose your team");
 });
 
