@@ -22,7 +22,12 @@ afterEach(() => {
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn().mockReturnValue({ team: "quantum-pipes", stage: 1 }),
+  useParams: jest
+    .fn()
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 2 }),
 }));
 
 test("it renders the header", () => {
@@ -80,4 +85,28 @@ test("it renders the action button", () => {
 
   expect(button).toBeInTheDocument();
   expect(button.textContent).toBe("Continue");
+});
+
+test("it renders the message if one is set", () => {
+  render(
+    <AppContext.Provider value={data}>
+      <Router>
+        <StagesScreen />
+      </Router>
+    </AppContext.Provider>,
+    container
+  );
+
+  const button = document.querySelector(".button");
+
+  button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+  const message = document
+    .querySelector(".header")
+    .nextSibling.querySelector(".text");
+
+  expect(message).toBeInTheDocument();
+  expect(message.textContent).toBe(
+    "Joe Blogs (joe.blogs@nationwide.co.uk) should have sent you an email with your VPN login details. If not, you’ll need to get in touch with them."
+  );
 });
