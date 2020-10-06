@@ -3,6 +3,7 @@ import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import WelcomeScreen from "./screens/welcome-screen";
 import TeamsScreen from "./screens/teams-screen";
 import StagesScreen from "./screens/stages-screen";
+import OnboardedScreen from "./screens/onboarded-screen";
 
 function Routes() {
   const history = useHistory();
@@ -29,6 +30,9 @@ function Routes() {
 
   return (
     <Switch>
+      <Route path="/onboarded">
+        <OnboardedScreen />
+      </Route>
       <Route path="/team/:team/:stage">
         <StagesScreen />
       </Route>

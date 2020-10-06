@@ -26,10 +26,14 @@ function StagesScreen() {
       />
       {"message" in currentStage && <Message {...currentStage.message} />}
       <StepsList steps={currentStage.steps} />
-      <ActionLinkButton
-        to={`/team/${team}/${parseInt(stage) + 1}`}
-        value="Continue"
-      />
+      {stage != teamDetails.stages.length ? (
+        <ActionLinkButton
+          to={`/team/${team}/${parseInt(stage) + 1}`}
+          value="Continue"
+        />
+      ) : (
+        <ActionLinkButton to={`/onboarded`} value="Continue" />
+      )}
     </div>
   );
 }
