@@ -8,6 +8,7 @@ import OnboardedScreen from "./screens/onboarded-screen";
 function Routes() {
   const history = useHistory();
   useEffect(() => {
+    // localStorage.removeItem("previous-screen");
     const previousScreen = localStorage.getItem("previous-screen");
     if (previousScreen != null) {
       localStorage.removeItem("previous-screen");
@@ -18,7 +19,8 @@ function Routes() {
   const location = useLocation();
   useEffect(() => {
     const storeScreen = () => {
-      localStorage.setItem("previous-screen", location.pathname);
+      if (location.pathname != "/onboarded")
+        localStorage.setItem("previous-screen", location.pathname);
     };
 
     window.addEventListener("beforeunload", storeScreen);
