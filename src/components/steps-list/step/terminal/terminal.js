@@ -1,7 +1,8 @@
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./styles.scss";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function Terminal(props) {
   return (
@@ -27,6 +28,9 @@ function Terminal(props) {
                 />
               )}
               {`${title}: ${command}`}
+              <CopyToClipboard text={command}>
+                <FontAwesomeIcon icon={faCopy} className={styles.copy_icon} />
+              </CopyToClipboard>
             </div>
           )
         )}
