@@ -5,19 +5,17 @@
 
   .button {
     display: flex;
-    flex: 0.05;
     flex-direction: column;
     text-align: center;
     font-size: 2.25vh;
     background-color: #004a8f;
     border: 0;
-    padding-top: 1.5vh;
+    padding-top: 1vh;
     padding-left: 3vh;
     padding-right: 3vh;
-    padding-bottom: 1.5vh;
+    padding-bottom: 1vh;
     color: #ffffff;
     border-radius: 3vh;
-    min-width: 17.5vh;
     align-items: center;
     text-decoration: none;
   }
