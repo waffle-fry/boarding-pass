@@ -2,10 +2,10 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .app {
-  height: 100vh;
   display: flex;
   flex: 1;
   font-family: -apple-system,
@@ -19,4 +19,5 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
+  margin: 2vh;
 }

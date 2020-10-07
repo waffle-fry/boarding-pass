@@ -6,6 +6,8 @@ import App from "./App";
 let root = document.createElement("div");
 
 root.id = "root";
+root.style = "min-height:100%;display:flex;flex:1;";
+
 document.body.appendChild(root);
 
 // Now we can render our application into it
