@@ -18,10 +18,10 @@ afterEach(() => {
   container = null;
 });
 
-test("it renders the correct link", () => {
+test("it renders the correct link if team has stages", () => {
   render(
     <Router>
-      <Item name="Team Awesome" slug="team-awesome" />
+      <Item name="Team Awesome" slug="team-awesome" stages={{}} />
     </Router>,
     container
   );
