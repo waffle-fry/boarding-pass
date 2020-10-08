@@ -24,3 +24,54 @@ npm start
 cd <project folder>
 npm run test
 ```
+
+## The config file
+
+The config file is currently setup as JSON. It expects the following:
+
+| Item             | Type   | Description                                                                                 |
+| ---------------- | ------ | ------------------------------------------------------------------------------------------- |
+| logo             | String | A URL that links to your organisation's logo                                                |
+| company_name     | String | The name of your organisation                                                               |
+| email_address    | String | The email address extension that your organisation uses (not currently used)                |
+| welcome_title    | String | The welcome message that you'd like displayed on the first page of the app                  |
+| welcome_subtitle | String | A subtitle that you'd like displayed beneath the welcome_title on the first page of the app |
+| teams            | Array  | A list of the teams at your organisation (see Teams below)                                  |
+
+### Teams
+
+| Item   | Type   | Description                                                             |
+| ------ | ------ | ----------------------------------------------------------------------- |
+| name   | String | The name of the team                                                    |
+| slug   | String | The name of the team without spaces                                     |
+| stages | Array  | Each stage that a new employee must progress through (see Stages below) |
+
+### Stages
+
+| Item  | Type   | Description                              |
+| ----- | ------ | ---------------------------------------- |
+| title | String | The title of the stage                   |
+| steps | Array  | Each step that corresponds to that stage |
+
+### Steps
+
+| Item          | Type   | Description                                                                    |
+| ------------- | ------ | ------------------------------------------------------------------------------ |
+| type          | String | The type of step (see Step Types below)                                        |
+| title         | String | The title of the step                                                          |
+| text          | Array  | The text to display for that stage                                             |
+| terminal      | object | A list of commands for the terminal step type (see below)                      |
+| action_button | object | Expects an "enabled" (boolean) and a "title" (string) to display on the button |
+
+### Step Types
+
+| Name        | Terminal                                       | Action Button                        |
+| ----------- | ---------------------------------------------- | ------------------------------------ |
+| terminal    | Y - {"commands": ["title": "", "command": ""]} | Y - runs specified terminal commands |
+| download    | X                                              | X                                    |
+| open-folder | X                                              | X                                    |
+| text-input  | X                                              | X                                    |
+| account     | X                                              | X                                    |
+| jira        | X                                              | X                                    |
+| github      | X                                              | X                                    |
+| aws         | X                                              | X                                    |
