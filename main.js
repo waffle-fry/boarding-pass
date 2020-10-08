@@ -77,7 +77,7 @@ function createWindow() {
       installExtension(REACT_DEVELOPER_TOOLS).catch((err) =>
         console.log("Error loading React DevTools: ", err)
       );
-      mainWindow.webContents.openDevTools();
+      // mainWindow.webContents.openDevTools();
     }
   });
 
