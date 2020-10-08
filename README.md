@@ -4,7 +4,7 @@ Boarding Pass is a desktop application that intends to streamline and improve up
 
 The application takes a (as yet incomplete) config-as-code approach to the onboarding journey, with the intention that it would be engineers - not managers or someone in HR - who would define and update the journey as necessary.
 
-As it stands, the app is both incomplete and very minimal.
+As it stands, the app is both incomplete and very minimal. While it can't currently achieve a whole lot, the vision is that it will eventually be able to hook into various different APIs and handle the the onboarding process end-to-end; from cloning repos to raising Jira tickets to interfacing with Slack or even furnishing the user's calendar with relevant meetings (such as standups).
 
 ## Prerequisits
 
