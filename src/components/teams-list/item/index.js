@@ -5,11 +5,22 @@ import { Link } from "react-router-dom";
 function TeamsListItem(props) {
   return (
     <div className={styles.container}>
-      <Link to={`team/${props.slug}/1`} className={styles.link}>
-        <div className={styles.card}>
-          <div className={styles.name}>{props.name}</div>
+      {"stages" in props ? (
+        <Link to={`team/${props.slug}/1`} className={styles.link}>
+          <div className={styles.card}>
+            <div className={styles.name}>{props.name}</div>
+          </div>
+        </Link>
+      ) : (
+        <div
+          onClick={() => alert("This team's config is incomplete")}
+          className={styles.link}
+        >
+          <div className={styles.card}>
+            <div className={styles.name}>{props.name}</div>
+          </div>
         </div>
-      </Link>
+      )}
     </div>
   );
 }
