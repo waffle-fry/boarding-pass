@@ -1,3 +1,5 @@
+@import "../../colours.scss";
+
 .action_button {
   display: flex;
   justify-content: center;
@@ -8,13 +10,13 @@
     flex-direction: column;
     text-align: center;
     font-size: 2.25vh;
-    background-color: #004a8f;
+    background-color: $primary;
     border: 0;
     padding-top: 1vh;
     padding-left: 3vh;
     padding-right: 3vh;
     padding-bottom: 1vh;
-    color: #ffffff;
+    color: $white;
     border-radius: 3vh;
     align-items: center;
     text-decoration: none;

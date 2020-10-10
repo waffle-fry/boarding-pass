@@ -1,38 +1,40 @@
-  .terminal {
-    background-color: #403E3E;
-    margin-top: 1vh;
+@import "../../../../colours.scss";
 
-    .commands {
-      margin: 1vh;
-      padding: 1vh;
-      font-size: 1.8vh;
+.terminal {
+  background-color: $terminal-bg;
+  margin-top: 1vh;
 
-      .running_spinner {
-        margin-right: 0.5vh;
-        color: #FFFFFF;
-      }
+  .commands {
+    margin: 1vh;
+    padding: 1vh;
+    font-size: 1.8vh;
 
-      .command {
-        margin-top: 0.5vh;
-        margin-bottom: 0.5vh;
-        color: #FFFFFF;
-      }
+    .running_spinner {
+      margin-right: 0.5vh;
+      color: $white;
+    }
 
-      .command_success {
-        margin-top: 0.5vh;
-        margin-bottom: 0.5vh;
-        color: #1dbc60;
-      }
+    .command {
+      margin-top: 0.5vh;
+      margin-bottom: 0.5vh;
+      color: $white;
+    }
 
-      .command_error {
-        margin-top: 0.5vh;
-        margin-bottom: 0.5vh;
-        color: #ec4e3d;
-      }
+    .command_success {
+      margin-top: 0.5vh;
+      margin-bottom: 0.5vh;
+      color: $success;
+    }
 
-      .copy_icon {
-        margin-left: 1vh;
-        color: #808080;
-      }
+    .command_error {
+      margin-top: 0.5vh;
+      margin-bottom: 0.5vh;
+      color: $error;
+    }
+
+    .copy_icon {
+      margin-left: 1vh;
+      color: $grey;
     }
   }
+}

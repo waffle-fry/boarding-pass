@@ -1,3 +1,5 @@
+@import "../../../colours.scss";
+
 .container {
   flex: 0 0 33%;
 
@@ -11,7 +13,7 @@
     margin: 1vh;
 
     .name {
-      color: #004a8f;
+      color: $primary;
       font-size: 2.5vh;
     }
   }

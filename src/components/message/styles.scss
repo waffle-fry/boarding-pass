@@ -1,3 +1,5 @@
+@import "../../colours.scss";
+
 .container {
   padding: 10vh;
   display: flex;
@@ -5,9 +7,9 @@
   align-items: center;
   justify-items: center;
   justify-content: center;
-  background-color: #FEFAED;
+  background-color: $message-bg;
   margin-bottom: 5vh;
-  color: #F4D03F;
+  color: $message-text;
 
   .icon_container {
     padding: 2vh;

@@ -1,9 +1,11 @@
+@import "../../colours.scss";
+
 .container {
   display: flex;
   flex: 1;
   flex-direction: column;
-  background-color: #FC776A;
-  color: #ffffff;
+  background-color: $bp-primary;
+  color: $white;
 
   .header {
     display: flex;
@@ -26,18 +28,18 @@
     flex-direction: column;
 
     .spinner {
-      color: #ffffff;
+      color: $white;
     }
 
     .message {
-      color: #ffffff;
+      color: $white;
       font-size: 2vh;
       font-style: italic;
       margin-top: 2vh;
     }
 
     .error {
-      color: #ffffff;
+      color: $white;
       display: flex;
       flex-direction: column;
       align-items: center;
