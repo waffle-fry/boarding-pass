@@ -8,27 +8,33 @@ import useAxios from "axios-hooks";
 import LoadingScreen from "./screens/loading-screen";
 import { exec } from "child_process";
 import isHexcolor from "is-hexcolor";
+import yaml from "js-yaml";
 
 function App() {
   const [configScssCreated, setConfigScssCreated] = useState(false);
+  const [convertedData, setConvertedData] = useState(null);
   const [
     { data, loading, error },
     refetch,
   ] = useAxios(
-    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/src/data.json",
+    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/config/config.yaml",
     { useCache: false }
   );
+
+  useEffect(() => {
+    let json = yaml.safeLoad(data);
+    setConvertedData(json);
+  }, [data]);
 
   useEffect(() => {
     if (
       !loading &&
       !error &&
-      isHexcolor(data.primary_colour) &&
-      isHexcolor(data.secondary_colour)
+      isHexcolor(convertedData.primary_colour) &&
+      isHexcolor(convertedData.secondary_colour)
     ) {
-      console.log(data);
-      const primaryColour = data.primary_colour;
-      const secondaryColour = data.secondary_colour;
+      const primaryColour = convertedData.primary_colour;
+      const secondaryColour = convertedData.secondary_colour;
       const scss =
         "$" +
         "primary: " +
@@ -48,12 +54,16 @@ function App() {
     } else {
       setConfigScssCreated(true);
     }
-  }, [data]);
+  }, [convertedData]);
 
   if (
     loading ||
     error ||
-    !(data !== undefined && data !== null && data.constructor == Object) ||
+    !(
+      convertedData !== undefined &&
+      convertedData !== null &&
+      convertedData.constructor == Object
+    ) ||
     !configScssCreated
   ) {
     const configMalformed = !loading && !error;
@@ -69,7 +79,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={data}>
+    <AppContext.Provider value={convertedData}>
       <Router>
         <div className={styles.app}>
           <Routes />
