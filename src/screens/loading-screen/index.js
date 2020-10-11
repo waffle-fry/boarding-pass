@@ -27,7 +27,7 @@ function LoadingScreen(props) {
           <div className={styles.title}>BOARDING PASS</div>
         </div>
         <div className={styles.content}>
-          {!error && !props.config_malformed ? (
+          {(!error && !props.config_malformed) || !props.config_scss_created ? (
             <div className={styles.content}>
               <FontAwesomeIcon
                 icon={faSpinner}

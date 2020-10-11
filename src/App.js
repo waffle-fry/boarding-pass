@@ -6,27 +6,62 @@ import AppContext from "./contexts/AppContext";
 import data from "./data.json";
 import useAxios from "axios-hooks";
 import LoadingScreen from "./screens/loading-screen";
+import { exec } from "child_process";
+import isHexcolor from "is-hexcolor";
 
 function App() {
-  // const [{ data, loading, error }, refetch] = useAxios(
-  //   "https://raw.githubusercontent.com/waffle-fry/boarding-pass/master/src/data.json?token=AMCP4J3K4D4OTAMBVEFJ4KK7PUH3E"
-  // );
+  const [configScssCreated, setConfigScssCreated] = useState(false);
+  const [{ data, loading, error }, refetch] = useAxios(
+    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/src/data.json?token=AMCP4J3K4D4OTAMBVEFJ4KK7PUH3E"
+  );
 
-  // if (
-  //   loading ||
-  //   error ||
-  //   !(data !== undefined && data !== null && data.constructor == Object)
-  // ) {
-  //   const configMalformed = !loading && !error;
+  useEffect(() => {
+    if (
+      !loading &&
+      !error &&
+      isHexcolor(data.primary_colour) &&
+      isHexcolor(data.secondary_colour)
+    ) {
+      const primaryColour = data.primary_colour;
+      const secondaryColour = data.secondary_colour;
+      const scss =
+        "$" +
+        "primary: " +
+        primaryColour +
+        ";\n" +
+        "$" +
+        "secondary: " +
+        secondaryColour +
+        ";";
+      new Promise((resolve, reject) => {
+        exec("cd src/ && echo '" + scss + "' > config.scss", () => {
+          resolve();
+        });
+      }).then(() => {
+        setConfigScssCreated(true);
+      });
+    } else {
+      setConfigScssCreated(true);
+    }
+  }, [data]);
 
-  //   return (
-  //     <LoadingScreen
-  //       error={error}
-  //       retry={refetch}
-  //       config_malformed={configMalformed}
-  //     />
-  //   );
-  // }
+  if (
+    loading ||
+    error ||
+    !(data !== undefined && data !== null && data.constructor == Object) ||
+    !configScssCreated
+  ) {
+    const configMalformed = !loading && !error;
+
+    return (
+      <LoadingScreen
+        error={error}
+        retry={refetch}
+        config_malformed={configMalformed}
+        config_scss_created={configScssCreated}
+      />
+    );
+  }
 
   return (
     <AppContext.Provider value={data}>

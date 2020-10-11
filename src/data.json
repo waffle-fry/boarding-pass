@@ -4,6 +4,8 @@
   "email_address": "@nationwide.co.uk",
   "welcome_title": "Welcome to Nationwide",
   "welcome_subtitle": "We're thrilled to have you",
+  "primary_colour": "#004A8F",
+  "secondary_colour": "#EC1C24",
   "teams": [
     {
       "name": "Izumi",
