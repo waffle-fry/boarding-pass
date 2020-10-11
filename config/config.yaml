@@ -22,9 +22,9 @@ teams:
                   command: docker pull busybox
                 - title: "Docker:"
                   command: docker pull helloworld
-              action_button:
-                enabled: true
-                title: "Install All"
+            action_button:
+              enabled: true
+              title: "Install All"
       - title: "Step Two: VPN Access"
         message:
           title: "CHECK YOUR EMAIL"
