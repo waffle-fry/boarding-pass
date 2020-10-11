@@ -39,3 +39,7 @@ teams:
           - type: "text-input"
             title: "Connect with the profile"
             text: "You’ll be prompted to enter the username and password you’ve been emailed - be sure to tick “save in keychain”."
+  - name: "Landing Zone"
+    slug: "landing-zone"
+  - name: "Test"
+    slug: "test"
