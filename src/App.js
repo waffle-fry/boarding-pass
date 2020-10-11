@@ -3,7 +3,7 @@ import styles from "./App.scss";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes";
 import AppContext from "./contexts/AppContext";
-import data from "./data.json";
+// import data from "./data.json";
 import useAxios from "axios-hooks";
 import LoadingScreen from "./screens/loading-screen";
 import { exec } from "child_process";
@@ -11,8 +11,12 @@ import isHexcolor from "is-hexcolor";
 
 function App() {
   const [configScssCreated, setConfigScssCreated] = useState(false);
-  const [{ data, loading, error }, refetch] = useAxios(
-    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/src/data.json?token=AMCP4J3K4D4OTAMBVEFJ4KK7PUH3E"
+  const [
+    { data, loading, error },
+    refetch,
+  ] = useAxios(
+    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/src/data.json?token=AMCP4J3K4D4OTAMBVEFJ4KK7PUH3E",
+    { useCache: false }
   );
 
   useEffect(() => {
@@ -22,6 +26,7 @@ function App() {
       isHexcolor(data.primary_colour) &&
       isHexcolor(data.secondary_colour)
     ) {
+      console.log(data);
       const primaryColour = data.primary_colour;
       const secondaryColour = data.secondary_colour;
       const scss =
