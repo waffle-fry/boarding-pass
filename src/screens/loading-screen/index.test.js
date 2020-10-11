@@ -53,7 +53,7 @@ test("it renders an error message", () => {
     toJSON: () => ({ message: "Error Message" }),
   };
 
-  render(<LoadingScreen error={error} />, container);
+  render(<LoadingScreen error={error} config_scss_created={true} />, container);
 
   const content = document.querySelector(".content");
   const spinner = content.querySelector(".spinner");
@@ -78,7 +78,10 @@ test("it allows the retry button to be clicked three times before replacing it w
 
   const retry = jest.fn();
 
-  render(<LoadingScreen error={error} retry={retry} />, container);
+  render(
+    <LoadingScreen error={error} retry={retry} config_scss_created={true} />,
+    container
+  );
 
   const retryButton = document.querySelector(".button");
 
@@ -100,7 +103,10 @@ test("it allows the retry button to be clicked three times before replacing it w
 });
 
 test("it renders a config malformed message", () => {
-  render(<LoadingScreen config_malformed={true} />, container);
+  render(
+    <LoadingScreen config_malformed={true} config_scss_created={true} />,
+    container
+  );
 
   const content = document.querySelector(".content");
   const spinner = content.querySelector(".spinner");
