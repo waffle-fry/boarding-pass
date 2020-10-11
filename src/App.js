@@ -15,7 +15,7 @@ function App() {
     { data, loading, error },
     refetch,
   ] = useAxios(
-    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/src/data.json?token=AMCP4J3K4D4OTAMBVEFJ4KK7PUH3E",
+    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/src/data.json",
     { useCache: false }
   );
 
