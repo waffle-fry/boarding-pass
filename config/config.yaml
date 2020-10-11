@@ -25,17 +25,17 @@ teams:
               action_button:
                 enabled: true
                 title: "Install All"
-      - title: "Step Two: VPN Access",
+      - title: "Step Two: VPN Access"
         message:
-          title: "CHECK YOUR EMAIL",
+          title: "CHECK YOUR EMAIL"
           text: "Joe Blogs (joe.blogs@nationwide.co.uk) should have sent you an email with your VPN login details. If not, you’ll need to get in touch with them."
         steps:
-          - type: "download",
-            title: "Install Tunnelblick",
+          - type: "download"
+            title: "Install Tunnelblick"
             text: "Open the Mac Self Service app to find the Tunnelblick install."
-          - type: "open-folder",
-            title: "Open the profile included with your login details",
+          - type: "open-folder"
+            title: "Open the profile included with your login details"
             text: "This will install it into Tunnelblick"
-          - type: "text-input",
-            title: "Connect with the profile",
+          - type: "text-input"
+            title: "Connect with the profile"
             text: "You’ll be prompted to enter the username and password you’ve been emailed - be sure to tick “save in keychain”."
