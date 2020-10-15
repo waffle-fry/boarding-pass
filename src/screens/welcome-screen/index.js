@@ -18,7 +18,7 @@ function WelcomeScreen() {
           alt="logo"
           className={styles.logo}
         />
-        <Title text={appContext.welcome_title} />
+        <Title>{appContext.welcome_title}</Title>
         <Subtitle text={appContext.welcome_subtitle} />
       </div>
       <div className={styles.content}>

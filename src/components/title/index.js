@@ -1,8 +1,11 @@
-import React from "react";
-import styles from "./styles.scss";
+import styled from "styled-components";
 
-function Title(props) {
-  return <div className={styles.title}>{props.text}</div>;
-}
+const Title = styled.h1`
+  font-size: 6vh;
+  text-align: center;
+  margin-top: 1vh;
+  margin-bottom: 0;
+  color: ${(props) => props.theme.main};
+`;
 
 export default Title;

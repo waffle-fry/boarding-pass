@@ -37,7 +37,7 @@ test("it renders the logo", () => {
 });
 
 test("it renders the title", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <WelcomeScreen />
@@ -46,10 +46,9 @@ test("it renders the title", () => {
     container
   );
 
-  const title = document.querySelector(".title");
+  const title = getByText(data.welcome_title);
 
   expect(title).toBeInTheDocument();
-  expect(title.textContent).toBe(data.welcome_title);
 });
 
 test("it renders the subtitle", () => {
