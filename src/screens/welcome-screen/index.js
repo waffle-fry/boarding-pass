@@ -19,7 +19,7 @@ function WelcomeScreen() {
           className={styles.logo}
         />
         <Title>{appContext.welcome_title}</Title>
-        <Subtitle text={appContext.welcome_subtitle} />
+        <Subtitle>{appContext.welcome_subtitle}</Subtitle>
       </div>
       <div className={styles.content}>
         <ActionLinkButton to="/teams" value="Get Started" />

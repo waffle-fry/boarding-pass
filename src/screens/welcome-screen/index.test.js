@@ -52,7 +52,7 @@ test("it renders the title", () => {
 });
 
 test("it renders the subtitle", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <WelcomeScreen />
@@ -61,10 +61,9 @@ test("it renders the subtitle", () => {
     container
   );
 
-  const subtitle = document.querySelector(".subtitle");
+  const subtitle = getByText(data.welcome_subtitle);
 
   expect(subtitle).toBeInTheDocument();
-  expect(subtitle.textContent).toBe(data.welcome_subtitle);
 });
 
 test("it renders the action button", () => {
