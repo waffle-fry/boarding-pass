@@ -9,10 +9,13 @@ import LoadingScreen from "./screens/loading-screen";
 import { exec } from "child_process";
 import isHexcolor from "is-hexcolor";
 import yaml from "js-yaml";
+import { ThemeProvider } from "styled-components";
 
 function App() {
   const [configScssCreated, setConfigScssCreated] = useState(false);
   const [convertedData, setConvertedData] = useState(null);
+  const [theme, setTheme] = useState({});
+
   const [
     { data, loading, error },
     refetch,
@@ -35,22 +38,9 @@ function App() {
     ) {
       const primaryColour = convertedData.primary_colour;
       const secondaryColour = convertedData.secondary_colour;
-      const scss =
-        "$" +
-        "primary: " +
-        primaryColour +
-        ";\n" +
-        "$" +
-        "secondary: " +
-        secondaryColour +
-        ";";
-      new Promise((resolve, reject) => {
-        exec("cd src/ && echo '" + scss + "' > config.scss", () => {
-          resolve();
-        });
-      }).then(() => {
-        setConfigScssCreated(true);
-      });
+      setTheme({ main: primaryColour, secondary: secondaryColour });
+
+      setConfigScssCreated(true);
     } else {
       setConfigScssCreated(true);
     }
@@ -80,11 +70,13 @@ function App() {
 
   return (
     <AppContext.Provider value={convertedData}>
-      <Router>
-        <div className={styles.app}>
-          <Routes />
-        </div>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div className={styles.app}>
+            <Routes />
+          </div>
+        </Router>
+      </ThemeProvider>
     </AppContext.Provider>
   );
 }
