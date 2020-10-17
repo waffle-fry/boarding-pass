@@ -21,7 +21,7 @@ afterEach(() => {
 });
 
 test("it renders the header", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <TeamsScreen />
@@ -32,11 +32,11 @@ test("it renders the header", () => {
 
   const header = document.querySelector(".header");
   const logo = document.querySelector(".logo");
-  const title = document.querySelector(".title");
+  const title = getByText("Choose your team");
 
   expect(header).toBeInTheDocument();
+  expect(title).toBeInTheDocument();
   expect(logo.getAttribute("src")).toBe(data.logo);
-  expect(title.textContent).toBe("Choose your team");
 });
 
 test("it renders the teams list", () => {

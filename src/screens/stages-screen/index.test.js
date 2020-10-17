@@ -31,7 +31,7 @@ jest.mock("react-router-dom", () => ({
 }));
 
 test("it renders the header", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <StagesScreen />
@@ -42,15 +42,16 @@ test("it renders the header", () => {
 
   const header = document.querySelector(".header");
   const logo = document.querySelector(".logo");
-  const title = document.querySelector(".title");
-  const subtitle = document.querySelector(".subtitle");
+  const title = getByText("Quantum Pipes");
+  const subtitle = getByText("Step One: Terminal Setup");
 
   expect(header).toBeInTheDocument();
+  expect(logo).toBeInTheDocument();
+  expect(title).toBeInTheDocument();
+  expect(subtitle).toBeInTheDocument();
   expect(logo.getAttribute("src")).toBe(
     "https://dynl.mktgcdn.com/p/jPpU9bYhzEYWnQ2poYw1EIYj9ha4ySR9guujLOLODIc/400x400.jpg"
   );
-  expect(title.textContent).toBe("Quantum Pipes");
-  expect(subtitle.textContent).toBe("Step One: Terminal Setup");
 });
 
 test("it renders the steps list", () => {
