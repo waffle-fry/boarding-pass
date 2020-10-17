@@ -98,7 +98,8 @@ test("it renders the message if one is set", () => {
     container
   );
 
-  const button = document.querySelector(".button");
+  const buttons = document.getElementsByTagName("a");
+  const button = buttons[buttons.length - 1];
 
   button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 
