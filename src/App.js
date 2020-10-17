@@ -10,19 +10,16 @@ import { exec } from "child_process";
 import isHexcolor from "is-hexcolor";
 import yaml from "js-yaml";
 import { ThemeProvider } from "styled-components";
+import url from "../configurl";
 
 function App() {
   const [configScssCreated, setConfigScssCreated] = useState(false);
   const [convertedData, setConvertedData] = useState(null);
   const [theme, setTheme] = useState({});
 
-  const [
-    { data, loading, error },
-    refetch,
-  ] = useAxios(
-    "https://raw.githubusercontent.com/waffle-fry/boarding-pass/develop/config/config.yaml",
-    { useCache: false }
-  );
+  const [{ data, loading, error }, refetch] = useAxios(url, {
+    useCache: false,
+  });
 
   useEffect(() => {
     let json = yaml.safeLoad(data);
