@@ -67,7 +67,7 @@ test("it renders the subtitle", () => {
 });
 
 test("it renders the action button", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <WelcomeScreen />
@@ -76,10 +76,8 @@ test("it renders the action button", () => {
     container
   );
 
-  const button = document.querySelector(".button");
+  const button = getByText("Get Started");
 
-  expect(button.getAttribute("href")).toBe("/teams");
-
+  expect(button.parentElement.getAttribute("href")).toBe("/teams");
   expect(button).toBeInTheDocument();
-  expect(button.textContent).toBe("Get Started");
 });
