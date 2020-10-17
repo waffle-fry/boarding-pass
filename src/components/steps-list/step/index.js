@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SecondaryButton from "../../secondary-button";
-import SecondaryIconButton from "../../secondary-button/icon";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import Button from "../../button";
