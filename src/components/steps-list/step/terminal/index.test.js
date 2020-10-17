@@ -87,13 +87,16 @@ test("it renders a spinner when running a command", async () => {
     },
   };
 
-  render(<TerminalStep {...step} number="1" />, container);
+  const { getByText } = render(
+    <TerminalStep {...step} number="1" />,
+    container
+  );
 
   child_process.exec.mockImplementation((command, callback) =>
     callback(null, { stdout: "ok" })
   );
 
-  const actionButton = document.querySelector(".button");
+  const actionButton = getByText("Install All");
 
   act(() => {
     actionButton.dispatchEvent(new MouseEvent("click", { bubbles: true }));
@@ -130,13 +133,16 @@ test("it updates the command after it is successfully executed", async () => {
     },
   };
 
-  render(<TerminalStep {...step} number="1" />, container);
+  const { getByText } = render(
+    <TerminalStep {...step} number="1" />,
+    container
+  );
 
   child_process.exec.mockImplementation((command, callback) => {
     callback(null, { stdout: "ok" });
   });
 
-  const actionButton = document.querySelector(".button");
+  const actionButton = getByText("Install All");
 
   await act(async () => {
     actionButton.dispatchEvent(new MouseEvent("click", { bubbles: true }));
@@ -171,13 +177,16 @@ test("it updates the command after it is unsuccessfully executed - error", async
     },
   };
 
-  render(<TerminalStep {...step} number="1" />, container);
+  const { getByText } = render(
+    <TerminalStep {...step} number="1" />,
+    container
+  );
 
   child_process.exec.mockImplementation((command, callback) => {
     callback({ error: "ok" });
   });
 
-  const actionButton = document.querySelector(".button");
+  const actionButton = getByText("Install All");
 
   await act(async () => {
     actionButton.dispatchEvent(new MouseEvent("click", { bubbles: true }));
@@ -212,13 +221,16 @@ test("it updates the command after it is unsuccessfully executed - stderr", asyn
     },
   };
 
-  render(<TerminalStep {...step} number="1" />, container);
+  const { getByText } = render(
+    <TerminalStep {...step} number="1" />,
+    container
+  );
 
   child_process.exec.mockImplementation((command, callback) => {
     callback(null, null, { stderr: "ok" });
   });
 
-  const actionButton = document.querySelector(".button");
+  const actionButton = getByText("Install All");
 
   await act(async () => {
     actionButton.dispatchEvent(new MouseEvent("click", { bubbles: true }));
