@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Title = styled.h1`
+const Title = styled.div`
   font-size: 6vh;
   text-align: center;
   margin-top: 1vh;
