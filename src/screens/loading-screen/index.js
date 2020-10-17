@@ -3,7 +3,7 @@ import styles from "./styles.scss";
 import app_styles from "../../App.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faTicketAlt } from "@fortawesome/free-solid-svg-icons";
-import SecondaryButton from "../../components/secondary-button";
+import Button from "../../components/button";
 
 function LoadingScreen(props) {
   const [retryAttempts, setRetryAttempts] = useState(0);
@@ -47,7 +47,7 @@ function LoadingScreen(props) {
                 <div>The configuration file is malformed</div>
               )}
               {retryAttempts < 3 && !props.config_malformed ? (
-                <SecondaryButton value="Retry" handleClick={retry} />
+                <Button value="Retry" handleClick={retry} />
               ) : (
                 <div>
                   {error && (

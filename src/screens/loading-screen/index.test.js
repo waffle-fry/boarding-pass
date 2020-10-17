@@ -83,7 +83,7 @@ test("it allows the retry button to be clicked three times before replacing it w
     container
   );
 
-  const retryButton = document.querySelector(".button");
+  const retryButton = document.getElementsByTagName("button")[0];
 
   expect(retryButton).toBeInTheDocument();
 
