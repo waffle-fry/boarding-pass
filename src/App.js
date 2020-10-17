@@ -33,6 +33,8 @@ function App() {
     if (
       !loading &&
       !error &&
+      convertedData !== undefined &&
+      convertedData !== null &&
       isHexcolor(convertedData.primary_colour) &&
       isHexcolor(convertedData.secondary_colour)
     ) {
