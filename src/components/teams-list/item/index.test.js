@@ -32,14 +32,14 @@ test("it renders the correct link if team has stages", () => {
 });
 
 test("it renders the team name", () => {
-  render(
+  const { getByText } = render(
     <Router>
       <Item name="Team Awesome" slug="team-awesome" />
     </Router>,
     container
   );
 
-  const name = document.querySelector(".name");
+  const name = getByText("Team Awesome");
 
-  expect(name.textContent).toBe("Team Awesome");
+  expect(name).toBeInTheDocument();
 });
