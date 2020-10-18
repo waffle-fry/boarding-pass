@@ -37,7 +37,7 @@ test("it renders the logo", () => {
 });
 
 test("it renders the title", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <WelcomeScreen />
@@ -46,14 +46,13 @@ test("it renders the title", () => {
     container
   );
 
-  const title = document.querySelector(".title");
+  const title = getByText(data.welcome_title);
 
   expect(title).toBeInTheDocument();
-  expect(title.textContent).toBe(data.welcome_title);
 });
 
 test("it renders the subtitle", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <WelcomeScreen />
@@ -62,14 +61,13 @@ test("it renders the subtitle", () => {
     container
   );
 
-  const subtitle = document.querySelector(".subtitle");
+  const subtitle = getByText(data.welcome_subtitle);
 
   expect(subtitle).toBeInTheDocument();
-  expect(subtitle.textContent).toBe(data.welcome_subtitle);
 });
 
 test("it renders the action button", () => {
-  render(
+  const { getByText } = render(
     <AppContext.Provider value={data}>
       <Router>
         <WelcomeScreen />
@@ -78,10 +76,8 @@ test("it renders the action button", () => {
     container
   );
 
-  const button = document.querySelector(".button");
+  const button = getByText("Get Started");
 
-  expect(button.getAttribute("href")).toBe("/teams");
-
+  expect(button.parentElement.getAttribute("href")).toBe("/teams");
   expect(button).toBeInTheDocument();
-  expect(button.textContent).toBe("Get Started");
 });

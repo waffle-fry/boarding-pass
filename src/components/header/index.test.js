@@ -18,24 +18,25 @@ afterEach(() => {
 });
 
 test("it renders the logo and title without a subtitle", () => {
-  render(<Header logo="logo-image" title="This is a title" />, container);
+  const { getByText } = render(
+    <Header logo="logo-image" title="This is a title" />,
+    container
+  );
 
   const header = document.querySelector(".header");
   const logo = header.querySelector(".logo");
-  const title = header.querySelector(".title");
+  const title = getByText("This is a title");
 
   expect(header).toBeInTheDocument();
   expect(logo).toBeInTheDocument();
   expect(title).toBeInTheDocument();
 
   expect(logo.getAttribute("src")).toBe("logo-image");
-  expect(title.textContent).toBe("This is a title");
-
-  expect(header.querySelector(".subtitle")).not.toBeInTheDocument();
+  expect(header.childElementCount).toBe(3);
 });
 
-test("it renders the logo and title without a subtitle", () => {
-  render(
+test("it renders the logo and title wit a subtitle", () => {
+  const { getByText } = render(
     <Header
       logo="logo-image"
       title="This is a title"
@@ -46,8 +47,8 @@ test("it renders the logo and title without a subtitle", () => {
 
   const header = document.querySelector(".header");
   const logo = header.querySelector(".logo");
-  const title = header.querySelector(".title");
-  const subtitle = header.querySelector(".subtitle");
+  const title = getByText("This is a title");
+  const subtitle = getByText("This is a subtitle");
 
   expect(header).toBeInTheDocument();
   expect(logo).toBeInTheDocument();
@@ -55,6 +56,4 @@ test("it renders the logo and title without a subtitle", () => {
   expect(subtitle).toBeInTheDocument();
 
   expect(logo.getAttribute("src")).toBe("logo-image");
-  expect(title.textContent).toBe("This is a title");
-  expect(subtitle.textContent).toBe("This is a subtitle");
 });

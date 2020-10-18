@@ -1,8 +1,10 @@
-import React from "react";
-import styles from "./styles.scss";
+import styled from "styled-components";
 
-function Subtitle(props) {
-  return <div className={styles.subtitle}>{props.text}</div>;
-}
+const Subtitle = styled.div`
+  font-size: 3.25vh;
+  text-align: center;
+  margin-top: 1vh;
+  color: ${(props) => props.theme.secondary};
+`;
 
 export default Subtitle;

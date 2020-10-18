@@ -3,8 +3,8 @@ import Subtitle from "../../components/subtitle";
 import Title from "../../components/title";
 import styles from "./styles.scss";
 import data from "../../data.json";
-import ActionLinkButton from "../../components/action-button/link";
 import AppContext from "../../contexts/AppContext";
+import LinkButton from "../../components/button/link";
 
 function WelcomeScreen() {
   const appContext = useContext(AppContext);
@@ -18,11 +18,11 @@ function WelcomeScreen() {
           alt="logo"
           className={styles.logo}
         />
-        <Title text={appContext.welcome_title} />
-        <Subtitle text={appContext.welcome_subtitle} />
+        <Title>{appContext.welcome_title}</Title>
+        <Subtitle>{appContext.welcome_subtitle}</Subtitle>
       </div>
       <div className={styles.content}>
-        <ActionLinkButton to="/teams" value="Get Started" />
+        <LinkButton primary to="/teams" value="Get Started" />
       </div>
     </div>
   );

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import ActionButton from "../../components/action-button";
 import Header from "../../components/header";
 import data from "../../data.json";
 import styles from "./styles.scss";
 import { Link, useParams } from "react-router-dom";
 import StepsList from "../../components/steps-list";
-import ActionLinkButton from "../../components/action-button/link";
 import Message from "../../components/message";
 import AppContext from "../../contexts/AppContext";
+import LinkButton from "../../components/button/link";
 
 function StagesScreen() {
   const appContext = useContext(AppContext);
@@ -27,12 +26,13 @@ function StagesScreen() {
       {"message" in currentStage && <Message {...currentStage.message} />}
       <StepsList steps={currentStage.steps} />
       {stage != teamDetails.stages.length ? (
-        <ActionLinkButton
+        <LinkButton
+          primary
           to={`/team/${team}/${parseInt(stage) + 1}`}
           value="Continue"
         />
       ) : (
-        <ActionLinkButton to={`/onboarded`} value="Continue" />
+        <LinkButton primary to="/onboarded" value="Continue" />
       )}
     </div>
   );
