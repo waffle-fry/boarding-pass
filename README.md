@@ -36,6 +36,8 @@ The config file is currently setup as JSON. It expects the following:
 | email_address    | String | The email address extension that your organisation uses (not currently used)                |
 | welcome_title    | String | The welcome message that you'd like displayed on the first page of the app                  |
 | welcome_subtitle | String | A subtitle that you'd like displayed beneath the welcome_title on the first page of the app |
+| primary_colour   | String | The hex colour of your brand primary colour                                                 |
+| secondary_colour | String | The hex colour of your brand secondary colour                                               |
 | teams            | Array  | A list of the teams at your organisation (see Teams below)                                  |
 
 ### Teams
