@@ -13,7 +13,7 @@ You'll need NPM for this.
 ## Running the app
 
 ```bash
-cd <project folder>
+cd boarding-pass
 npm install #if it's your first time
 npm start
 ```
@@ -21,7 +21,7 @@ npm start
 ## Running the tests
 
 ```bash
-cd <project folder>
+cd boarding-pass
 npm run test
 ```
 
@@ -48,10 +48,10 @@ The config file is currently setup as JSON. It expects the following:
 
 ### Stages
 
-| Item  | Type   | Description                              |
-| ----- | ------ | ---------------------------------------- |
-| title | String | The title of the stage                   |
-| steps | Array  | Each step that corresponds to that stage |
+| Item  | Type   | Description                                         |
+| ----- | ------ | --------------------------------------------------- |
+| title | String | The title of the stage                              |
+| steps | Array  | The steps that make up each stage (see Steps below) |
 
 ### Steps
 

@@ -1,6 +1,12 @@
 import React from "react";
 import styles from "./styles.scss";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const Name = styled.div`
+  color: ${(props) => props.theme.main};
+  font-size: 2.5vh;
+`;
 
 function TeamsListItem(props) {
   return (
@@ -8,7 +14,7 @@ function TeamsListItem(props) {
       {"stages" in props ? (
         <Link to={`team/${props.slug}/1`} className={styles.link}>
           <div className={styles.card}>
-            <div className={styles.name}>{props.name}</div>
+            <Name>{props.name}</Name>
           </div>
         </Link>
       ) : (
@@ -17,7 +23,7 @@ function TeamsListItem(props) {
           className={styles.link}
         >
           <div className={styles.card}>
-            <div className={styles.name}>{props.name}</div>
+            <Name>{props.name}</Name>
           </div>
         </div>
       )}

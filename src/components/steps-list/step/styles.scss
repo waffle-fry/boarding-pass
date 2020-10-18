@@ -12,55 +12,18 @@
   display: flex;
 }
 
-.step_number {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  background-color: $primary;
+.icon {
   color: $white;
-  width: 5vh;
-  height: 5vh;
-  border-radius: 100%;
-  margin-right: 2.5vh;
+  font-size: 3vh;
 }
 
-.container {
+.content_container {
+  margin: 1vh;
   display: flex;
-  flex: 1;
-  flex-direction: row;
-  border-color: $primary;
-  border-width: 0.1vh;
-  border-style: solid;
-  min-height: 8vh;
+  flex-direction: column;
+  justify-content: center;
 
-  .icon_container {
-    background-color: $primary;
-    padding: 3.5vh;
-    align-items: center;
-    display: flex;
-
-    .icon {
-      color: $white;
-      font-size: 3vh;
-    }
-  }
-
-  .content_container {
-    margin: 1vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    .title {
-      font-size: 2.25vh;
-      font-weight: bold;
-      color: $primary;
-      margin-bottom: 0.25vh;
-    }
-
-    .text {
-      font-size: 2vh;
-    }
+  .text {
+    font-size: 2vh;
   }
 }

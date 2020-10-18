@@ -28,12 +28,14 @@ test("it renders the step number", () => {
     },
   ];
 
-  render(<Step {...steps} number="1" icon={faDownload} />, container);
+  const { getByText } = render(
+    <Step {...steps} number="1" icon={faDownload} />,
+    container
+  );
 
-  const stepNumber = document.querySelector(".step_number");
+  const stepNumber = getByText("1");
 
   expect(stepNumber).toBeInTheDocument();
-  expect(stepNumber.textContent).toBe("1");
 });
 
 test("it renders the icon", () => {
@@ -60,12 +62,14 @@ test("it renders the title", () => {
     text: "Download and open the file.",
   };
 
-  render(<Step {...step} number="1" icon={faDownload} />, container);
+  const { getByText } = render(
+    <Step {...step} number="1" icon={faDownload} />,
+    container
+  );
 
-  const title = document.querySelector(".title");
+  const title = getByText("Download a file");
 
   expect(title).toBeInTheDocument();
-  expect(title.textContent).toBe("Download a file");
 });
 
 test("it renders the text", () => {
@@ -75,12 +79,14 @@ test("it renders the text", () => {
     text: "Download and open the file.",
   };
 
-  render(<Step {...step} number="1" icon={faDownload} />, container);
+  const { getByText } = render(
+    <Step {...step} number="1" icon={faDownload} />,
+    container
+  );
 
-  const text = document.querySelector(".text");
+  const text = getByText("Download and open the file.");
 
   expect(text).toBeInTheDocument();
-  expect(text.textContent).toBe("Download and open the file.");
 });
 
 test("it renders an additional view", () => {
@@ -119,12 +125,14 @@ test("it renders an action button", () => {
     },
   };
 
-  render(<Step {...step} number="1" icon={faDownload} />, container);
+  const { getByText } = render(
+    <Step {...step} number="1" icon={faDownload} />,
+    container
+  );
 
-  const buttonContainer = document.querySelector(".secondary_button");
+  const buttonContainer = getByText("Action!");
 
   expect(buttonContainer).toBeInTheDocument();
-  expect(buttonContainer.firstChild.value).toBe("Action!");
 });
 
 test("it renders a spinner when the action is running", () => {
@@ -143,7 +151,7 @@ test("it renders a spinner when the action is running", () => {
     container
   );
 
-  const iconButton = document.querySelector(".button");
+  const iconButton = document.getElementsByTagName("button")[0];
   const icon = iconButton.firstChild;
 
   expect(iconButton).toBeInTheDocument();

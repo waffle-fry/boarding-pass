@@ -48,7 +48,7 @@ function TerminalStep(props) {
 
     commands.forEach(({ command, success, error }, index) => {
       new Promise((resolve, reject) => {
-        if (!success && !error) {
+        if (!success) {
           setCommand(index, "running", true);
           exec(command, (error, stdout, stderr) => {
             if (error) {
