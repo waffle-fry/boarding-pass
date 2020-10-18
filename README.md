@@ -62,8 +62,8 @@ The config file is currently setup as JSON. It expects the following:
 | type          | String | The type of step (see Step Types below)                                        |
 | title         | String | The title of the step                                                          |
 | text          | Array  | The text to display for that stage                                             |
-| terminal      | object | A list of commands for the terminal step type (see below)                      |
-| action_button | object | Expects an "enabled" (boolean) and a "title" (string) to display on the button |
+| terminal      | Object | A list of commands for the terminal step type (see below)                      |
+| action_button | Object | Expects an "enabled" (boolean) and a "title" (string) to display on the button |
 
 ### Step Types
 
