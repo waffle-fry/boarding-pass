@@ -21,38 +21,34 @@ function App() {
     useCache: false,
   });
 
-  useEffect(() => {
-    let json = yaml.safeLoad(data);
-    setConvertedData(json);
-  }, [data]);
+  // useEffect(() => {
+  //   let json = yaml.safeLoad(data);
+  //   setConvertedData(json);
+  // }, [data]);
 
   useEffect(() => {
     if (
       !loading &&
       !error &&
-      convertedData !== undefined &&
-      convertedData !== null &&
-      isHexcolor(convertedData.primary_colour) &&
-      isHexcolor(convertedData.secondary_colour)
+      data !== undefined &&
+      data !== null &&
+      isHexcolor(data.primary_colour) &&
+      isHexcolor(data.secondary_colour)
     ) {
-      const primaryColour = convertedData.primary_colour;
-      const secondaryColour = convertedData.secondary_colour;
+      const primaryColour = data.primary_colour;
+      const secondaryColour = data.secondary_colour;
       setTheme({ main: primaryColour, secondary: secondaryColour });
 
       setConfigScssCreated(true);
     } else {
       setConfigScssCreated(true);
     }
-  }, [convertedData]);
+  }, [data]);
 
   if (
     loading ||
     error ||
-    !(
-      convertedData !== undefined &&
-      convertedData !== null &&
-      convertedData.constructor == Object
-    ) ||
+    !(data !== undefined && data !== null && data.constructor == Object) ||
     !configScssCreated
   ) {
     const configMalformed = !loading && !error;
@@ -68,7 +64,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={convertedData}>
+    <AppContext.Provider value={data}>
       <ThemeProvider theme={theme}>
         <Router>
           <div className={styles.app}>
