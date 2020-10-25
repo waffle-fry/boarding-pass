@@ -3,15 +3,38 @@ package main
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"testing"
+
+	"github.com/spf13/viper"
 )
 
 func TestGETConfig(t *testing.T) {
 	t.Run("Returns stored config", func(t *testing.T) {
-		want := Config{"Nationwide"}
-		server := NewServer()
+		var config Config
+		viper.SetConfigName("config")
+		viper.AddConfigPath(".")
+
+		err := viper.ReadInConfig()
+		if err != nil {
+			log.Fatalf("Error loading config file: %v", err)
+		}
+
+		err = viper.Unmarshal(&config)
+		if err != nil {
+			log.Fatalf("Error reading config file - aws: %v", err)
+		}
+
+		err = validate(config)
+		if err != nil {
+			log.Fatalf("Configuration file error: %v", err)
+		}
+
+		want := config
+		server := NewServer(config)
 		request := newGetConfigRequest()
 		response := httptest.NewRecorder()
 
@@ -60,7 +83,7 @@ func assertStatus(t *testing.T, got, want int) {
 func assertConfig(t *testing.T, got, want Config) {
 	t.Helper()
 
-	if got != want {
+	if !reflect.DeepEqual(got, want) {
 		t.Errorf("Configs don't match: got %v, want %v", got, want)
 	}
 }
