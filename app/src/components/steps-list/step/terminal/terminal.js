@@ -27,7 +27,7 @@ function Terminal(props) {
                   spin
                 />
               )}
-              {`${title}: ${command}`}
+              {`${title} ${command}`}
               <CopyToClipboard text={command}>
                 <FontAwesomeIcon icon={faCopy} className={styles.copy_icon} />
               </CopyToClipboard>
