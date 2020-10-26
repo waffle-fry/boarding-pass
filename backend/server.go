@@ -18,22 +18,25 @@ const (
 
 // Server - the server
 type Server struct {
+	store  Store
 	config Config
 	http.Handler
 }
 
 // NewServer - creates a new instance of Server
-func NewServer(config Config) *Server {
+func NewServer(store Store, config Config) *Server {
 	s := new(Server)
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(accessControlMiddleware)
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
+	router.HandleFunc("/apps", s.getApps).Methods(http.MethodGet)
 
 	registerPluginEndpoints(router)
 
 	s.Handler = router
 	s.config = config
+	s.store = store
 
 	return s
 }
@@ -80,4 +83,8 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, http.StatusOK, s.config)
+}
+
+func (s *Server) getApps(w http.ResponseWriter, r *http.Request) {
+	respondWithJSON(w, http.StatusOK, s.store.GetApps())
 }
