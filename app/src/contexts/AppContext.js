@@ -7,6 +7,7 @@ const AppContext = createContext({
   welcome_title: null,
   welcome_subtitle: null,
   teams: [],
+  onboarded: [],
 });
 
 export default AppContext;

@@ -43,3 +43,5 @@ teams:
     slug: "landing-zone"
   - name: "Test"
     slug: "test"
+onboarded:
+  - slack

@@ -2,14 +2,15 @@ package main
 
 // Config - the configuration
 type Config struct {
-	Logo            string `json:"logo" mapstructure:"logo"`
-	CompanyName     string `json:"company_name" mapstructure:"company_name"`
-	EmailAddress    string `json:"email_address" mapstructure:"email_address"`
-	WelcomeTitle    string `json:"welcome_title" mapstructure:"welcome_title"`
-	WelcomeSubtitle string `json:"welcome_subtitle" mapstructure:"welcome_subtitle"`
-	PrimaryColour   string `json:"primary_colour" mapstructure:"primary_colour"`
-	SecondaryColour string `json:"secondary_colour" mapstructure:"secondary_colour"`
-	Teams           []Team `json:"teams" mapstructure:"teams"`
+	Logo            string   `json:"logo" mapstructure:"logo"`
+	CompanyName     string   `json:"company_name" mapstructure:"company_name"`
+	EmailAddress    string   `json:"email_address" mapstructure:"email_address"`
+	WelcomeTitle    string   `json:"welcome_title" mapstructure:"welcome_title"`
+	WelcomeSubtitle string   `json:"welcome_subtitle" mapstructure:"welcome_subtitle"`
+	PrimaryColour   string   `json:"primary_colour" mapstructure:"primary_colour"`
+	SecondaryColour string   `json:"secondary_colour" mapstructure:"secondary_colour"`
+	Teams           []Team   `json:"teams" mapstructure:"teams"`
+	Onboarded       []string `json:"onboarded" mapstructure:"onboarded"`
 }
 
 // Team - the elements that make up a Team

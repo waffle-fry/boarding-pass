@@ -1,11 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./styles.scss";
 import AppContext from "../../contexts/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
+import url from "../../../configurl";
+import Axios from "axios";
 
 function OnboardedScreen() {
   const appContext = useContext(AppContext);
+  const backendURL = url.split("/config")[0];
+
+  useEffect(() => {
+    appContext.onboarded.forEach((plugin) => {
+      Axios.post(backendURL + "/" + plugin);
+    });
+  });
 
   return (
     <div className={styles.container}>
