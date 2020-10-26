@@ -1,7 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"path/filepath"
+	"plugin"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -26,10 +30,39 @@ func NewServer(config Config) *Server {
 	router.Use(accessControlMiddleware)
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 
+	registerPluginEndpoints(router)
+
 	s.Handler = router
 	s.config = config
 
 	return s
+}
+
+func registerPluginEndpoints(router *mux.Router) {
+	allPlugins, err := filepath.Glob("plugins/*.so")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, filename := range allPlugins {
+		pluginName := strings.Split(strings.Split(filename, "plugins/")[1], ".so")[0]
+		fmt.Println(pluginName)
+		plugin, err := plugin.Open(filename)
+		if err != nil {
+			panic(err)
+		}
+		symbol, err := plugin.Lookup("Endpoint")
+		if err != nil {
+			panic(err)
+		}
+		endpointFunc, ok := symbol.(func(w http.ResponseWriter, r *http.Request))
+		if !ok {
+			panic("Plugin has no 'w http.ResponseWriter, r *http.Request' function")
+		}
+
+		router.HandleFunc(fmt.Sprintf("/%v", pluginName), endpointFunc)
+	}
+
 }
 
 func accessControlMiddleware(next http.Handler) http.Handler {
