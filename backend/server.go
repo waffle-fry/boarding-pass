@@ -46,7 +46,6 @@ func registerPluginEndpoints(router *mux.Router) {
 
 	for _, filename := range allPlugins {
 		pluginName := strings.Split(strings.Split(filename, "plugins/")[1], ".so")[0]
-		fmt.Println(pluginName)
 		plugin, err := plugin.Open(filename)
 		if err != nil {
 			panic(err)
