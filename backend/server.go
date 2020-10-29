@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
-	"path/filepath"
-	"plugin"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -32,39 +34,15 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 	router.HandleFunc("/apps", s.getApps).Methods(http.MethodGet)
 
-	registerPluginEndpoints(router)
+	for _, app := range store.GetApps() {
+		router.HandleFunc(fmt.Sprintf("/%v", strings.ToLower(app.Name)), s.callAppEndpoint)
+	}
 
 	s.Handler = router
 	s.config = config
 	s.store = store
 
 	return s
-}
-
-func registerPluginEndpoints(router *mux.Router) {
-	allPlugins, err := filepath.Glob("plugins/*.so")
-	if err != nil {
-		panic(err)
-	}
-
-	for _, filename := range allPlugins {
-		pluginName := strings.Split(strings.Split(filename, "plugins/")[1], ".so")[0]
-		plugin, err := plugin.Open(filename)
-		if err != nil {
-			panic(err)
-		}
-		symbol, err := plugin.Lookup("Endpoint")
-		if err != nil {
-			panic(err)
-		}
-		endpointFunc, ok := symbol.(func(w http.ResponseWriter, r *http.Request))
-		if !ok {
-			panic("Plugin has no 'w http.ResponseWriter, r *http.Request' function")
-		}
-
-		router.HandleFunc(fmt.Sprintf("/%v", pluginName), endpointFunc)
-	}
-
 }
 
 func accessControlMiddleware(next http.Handler) http.Handler {
@@ -87,4 +65,35 @@ func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getApps(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, http.StatusOK, s.store.GetApps())
+}
+
+func (s *Server) callAppEndpoint(w http.ResponseWriter, r *http.Request) {
+	apps := s.store.GetApps()
+	var app App
+
+	for _, appFromStore := range apps {
+		if r.URL.Path == strings.ToLower("/"+appFromStore.Name) {
+			app = appFromStore
+		}
+	}
+
+	requestBody, err := json.Marshal(app.Data)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	response, err := http.Post(app.WebhookURL, "applcation/json", bytes.NewBuffer(requestBody))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	respondWithMessage(w, http.StatusOK, string(body))
 }

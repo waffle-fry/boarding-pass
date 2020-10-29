@@ -82,7 +82,6 @@ func main() {
 	// if err != nil {
 	// 	log.Fatal(err)
 	// }
-
 	store := &InMemoryStore{}
 	server := NewServer(store, config)
 	if err = http.ListenAndServe(":5000", server); err != nil {
