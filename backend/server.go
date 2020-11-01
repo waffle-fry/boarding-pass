@@ -70,7 +70,9 @@ func (s *Server) getDashboard(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getWebhooks(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.tmpl", "layout/webhooks.html"))
-	t.Execute(w, nil)
+	page := Page{"Webhooks", s.store.GetApps()}
+
+	t.Execute(w, page)
 }
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
