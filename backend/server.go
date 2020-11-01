@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -31,6 +32,8 @@ func NewServer(store Store, config Config) *Server {
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(accessControlMiddleware)
+	router.HandleFunc("/dashboard", s.getDashboard).Methods(http.MethodGet)
+	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 	router.HandleFunc("/apps", s.getApps).Methods(http.MethodGet)
 
@@ -57,6 +60,11 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, r)
 	})
+}
+
+func (s *Server) getDashboard(w http.ResponseWriter, r *http.Request) {
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.tmpl", "layout/index.tmpl"))
+	t.Execute(w, nil)
 }
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
