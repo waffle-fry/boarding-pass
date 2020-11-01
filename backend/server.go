@@ -64,12 +64,12 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 }
 
 func (s *Server) getDashboard(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.tmpl", "layout/index.tmpl"))
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/index.html"))
 	t.Execute(w, nil)
 }
 
 func (s *Server) getWebhooks(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.tmpl", "layout/webhooks.html"))
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
 	page := Page{"Webhooks", s.store.GetApps()}
 
 	t.Execute(w, page)
