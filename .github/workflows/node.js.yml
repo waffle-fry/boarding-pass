@@ -2,6 +2,8 @@ name: Node.js CI (develop-v0.2)
 
 on:
   push:
+    branches:
+      - "*"
     paths: [app]
 
 jobs:
