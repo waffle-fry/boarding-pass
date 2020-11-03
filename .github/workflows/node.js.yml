@@ -3,7 +3,9 @@ name: Node.js CI (develop-v0.2)
 on:
   push:
     branches:
-      - "*"
+      - "develop-v0.2"
+    paths:
+      - "app"
 
 jobs:
   build:
