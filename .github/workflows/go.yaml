@@ -1,11 +1,7 @@
-name: Go
+name: Go (develop-v0.2)
 
 on:
   push:
-    # branches: [master, develop-v0.2]
-    paths: [backend]
-  pull_request:
-    branches: [master]
     paths: [backend]
 
 jobs:
