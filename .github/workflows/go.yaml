@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - "develop-v0.2"
-    paths:
-      - "backend"
 
 jobs:
   lint:
