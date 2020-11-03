@@ -2,7 +2,7 @@ name: Go
 
 on:
   push:
-    branches: [master, develop-v0.2]
+    # branches: [master, develop-v0.2]
     paths: [backend]
   pull_request:
     branches: [master]
