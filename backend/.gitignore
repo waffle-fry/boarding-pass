@@ -17,4 +17,6 @@
 # VSCode
 .vscode
 
+# Boarding Pass
+backend
 database_config.yaml
