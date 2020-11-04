@@ -27,7 +27,7 @@ func TestGETConfig(t *testing.T) {
 func TestGETApps(t *testing.T) {
 	t.Run("Returns stored apps", func(t *testing.T) {
 		want := []App{
-			{"Test App", "http://webhook.com", map[string]string{"text": "test"}},
+			{"Test App", "http://webhook.com", map[string]interface{}{"text": "test"}},
 		}
 		store := &InMemoryStore{want}
 		server := NewServer(store, getConfig())
