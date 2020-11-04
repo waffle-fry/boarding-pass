@@ -57,7 +57,9 @@ jobs:
           fi
 
       - name: Vet
-        run: go vet .
+        run: |
+          cd backend
+          go vet .
 
   test:
     name: Test
@@ -82,7 +84,9 @@ jobs:
           fi
 
       - name: Test
-        run: go test -v .
+        run: |
+          cd backend
+          go test -v .
 
   build:
     name: Build
@@ -107,4 +111,6 @@ jobs:
           fi
 
       - name: Build
-        run: go build -v .
+        run: |
+          cd backend
+          go build -v .
