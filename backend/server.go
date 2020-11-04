@@ -67,39 +67,57 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 
 func (s *Server) getDashboard(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/index.html"))
-	t.Execute(w, nil)
+	err := t.Execute(w, nil)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
+	}
 }
 
 func (s *Server) getWebhooks(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
 	page := Page{"Webhooks", s.store.GetApps()}
 
-	t.Execute(w, page)
+	err := t.Execute(w, page)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
+	}
 }
 
 func (s *Server) getCreateWebhook(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/add_webhook.html"))
 	page := Page{"Add Webhook", nil}
 
-	t.Execute(w, page)
+	err := t.Execute(w, page)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
+	}
 }
 
 func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+	err := r.ParseForm()
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
 
 	name := r.Form.Get("name")
 	webhookURL := r.Form.Get("webhookurl")
 	dataString := r.Form.Get("data")
 
 	var data map[string]interface{}
-	json.Unmarshal([]byte(dataString), &data)
+	err = json.Unmarshal([]byte(dataString), &data)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
 
 	s.store.AddApp(name, webhookURL, data)
 
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
 	page := Page{"Webhooks", s.store.GetApps()}
 
-	t.Execute(w, page)
+	err = t.Execute(w, page)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
+	}
 }
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
