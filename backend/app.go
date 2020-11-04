@@ -4,5 +4,5 @@ package main
 type App struct {
 	Name       string
 	WebhookURL string
-	Data       map[string]string
+	Data       map[string]interface{}
 }

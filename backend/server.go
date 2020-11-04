@@ -34,6 +34,8 @@ func NewServer(store Store, config Config) *Server {
 	router.Use(accessControlMiddleware)
 	router.HandleFunc("/dashboard", s.getDashboard).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks", s.getWebhooks).Methods(http.MethodGet)
+	router.HandleFunc("/webhooks/create", s.getCreateWebhook).Methods(http.MethodGet)
+	router.HandleFunc("/webhooks", s.postCreateWebhook).Methods(http.MethodPost)
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 	router.HandleFunc("/apps", s.getApps).Methods(http.MethodGet)
@@ -69,6 +71,31 @@ func (s *Server) getDashboard(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) getWebhooks(w http.ResponseWriter, r *http.Request) {
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
+	page := Page{"Webhooks", s.store.GetApps()}
+
+	t.Execute(w, page)
+}
+
+func (s *Server) getCreateWebhook(w http.ResponseWriter, r *http.Request) {
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/add_webhook.html"))
+	page := Page{"Add Webhook", nil}
+
+	t.Execute(w, page)
+}
+
+func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+
+	name := r.Form.Get("name")
+	webhookURL := r.Form.Get("webhookurl")
+	dataString := r.Form.Get("data")
+
+	var data map[string]interface{}
+	json.Unmarshal([]byte(dataString), &data)
+
+	s.store.AddApp(name, webhookURL, data)
+
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
 	page := Page{"Webhooks", s.store.GetApps()}
 

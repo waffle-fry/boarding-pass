@@ -8,7 +8,7 @@ func (i *InMemoryStore) GetApps() []App {
 	return i.store
 }
 
-func (i *InMemoryStore) AddApp(name, webhookURL string, data map[string]string) {
+func (i *InMemoryStore) AddApp(name, webhookURL string, data map[string]interface{}) {
 	app := App{name, webhookURL, data}
 	i.store = append(i.store, app)
 }
