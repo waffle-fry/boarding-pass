@@ -48,8 +48,8 @@ func newGetConfigRequest() *http.Request {
 	return request
 }
 
-func newGetAppsRequest() *http.Request {
-	request, _ := http.NewRequest(http.MethodGet, "/apps", nil)
+func newGetDashboardRequest(endpoint string) *http.Request {
+	request, _ := http.NewRequest(http.MethodGet, endpoint, nil)
 	return request
 }
 

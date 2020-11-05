@@ -38,7 +38,6 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/webhooks", s.postCreateWebhook).Methods(http.MethodPost)
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
-	router.HandleFunc("/apps", s.getApps).Methods(http.MethodGet)
 
 	for _, app := range store.GetApps() {
 		router.HandleFunc(fmt.Sprintf("/%v", strings.ToLower(app.Name)), s.callAppEndpoint)
@@ -122,10 +121,6 @@ func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, http.StatusOK, s.config)
-}
-
-func (s *Server) getApps(w http.ResponseWriter, r *http.Request) {
-	respondWithJSON(w, http.StatusOK, s.store.GetApps())
 }
 
 func (s *Server) callAppEndpoint(w http.ResponseWriter, r *http.Request) {

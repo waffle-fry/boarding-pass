@@ -24,22 +24,25 @@ func TestGETConfig(t *testing.T) {
 	})
 }
 
-func TestGETApps(t *testing.T) {
-	t.Run("Returns stored apps", func(t *testing.T) {
-		want := []App{
-			{"Test App", "http://webhook.com", map[string]interface{}{"text": "test"}},
+func TestUI(t *testing.T) {
+	t.Run("Loads all dashboard endpoints", func(t *testing.T) {
+		endpointTests := []struct {
+			endpoint string
+		}{
+			{"/dashboard"},
+			{"/webhooks"},
+			{"/webhooks/create"},
 		}
-		store := &InMemoryStore{want}
+
+		store := &InMemoryStore{}
 		server := NewServer(store, getConfig())
-		request := newGetAppsRequest()
-		response := httptest.NewRecorder()
 
-		server.ServeHTTP(response, request)
+		for _, tt := range endpointTests {
+			request := newGetDashboardRequest(tt.endpoint)
+			response := httptest.NewRecorder()
+			server.ServeHTTP(response, request)
 
-		got := getAppsFromResponse(t, response.Body)
-
-		assertStatus(t, response.Code, http.StatusOK)
-		assertContentType(t, response, ContentTypeJSON)
-		assertApps(t, got, want)
+			assertStatus(t, response.Code, http.StatusOK)
+		}
 	})
 }
