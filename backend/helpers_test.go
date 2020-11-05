@@ -6,7 +6,9 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/spf13/viper"
@@ -50,6 +52,13 @@ func newGetConfigRequest() *http.Request {
 
 func newGetDashboardRequest(endpoint string) *http.Request {
 	request, _ := http.NewRequest(http.MethodGet, endpoint, nil)
+	return request
+}
+
+func newPostWebhookRequest(data url.Values) *http.Request {
+	request, _ := http.NewRequest(http.MethodPost, "/webhooks", strings.NewReader(data.Encode()))
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
 	return request
 }
 
