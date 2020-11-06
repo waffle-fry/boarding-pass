@@ -4,6 +4,7 @@ import { unmountComponentAtNode } from "react-dom";
 import { render } from "@testing-library/react";
 import useAxios from "axios-hooks";
 import "jest-styled-components";
+import data from "./data.json";
 
 jest.mock("axios-hooks");
 
@@ -67,12 +68,6 @@ test("it renders the config malformed error message", () => {
 });
 
 test("it renders the app and sets the theme colours according to the config", () => {
-  const data = `
-    welcome_title: "Welcome to Nationwide"
-    welcome_subtitle: "We're thrilled to have you"
-    primary_colour: "#004A8F"
-    secondary_colour: "#EC1C24"
-  `;
   useAxios.mockReturnValue([{ loading: false, error: false, data: data }]);
   const { getByText } = render(<App />, container);
 

@@ -37,11 +37,11 @@ test("it renders the commands in the terminal view", () => {
     terminal: {
       commands: [
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull busybox",
         },
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull helloworld",
         },
       ],
@@ -72,11 +72,11 @@ test("it renders a spinner when running a command", async () => {
     terminal: {
       commands: [
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull busybox",
         },
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull helloworld",
         },
       ],
@@ -118,11 +118,11 @@ test("it updates the command after it is successfully executed", async () => {
     terminal: {
       commands: [
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull busybox",
         },
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull helloworld",
         },
       ],
@@ -162,11 +162,11 @@ test("it updates the command after it is unsuccessfully executed - error", async
     terminal: {
       commands: [
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull busybox",
         },
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull helloworld",
         },
       ],
@@ -206,11 +206,11 @@ test("it updates the command after it is unsuccessfully executed - stderr", asyn
     terminal: {
       commands: [
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull busybox",
         },
         {
-          title: "Docker",
+          title: "Docker:",
           command: "docker pull helloworld",
         },
       ],

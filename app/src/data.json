@@ -25,11 +25,11 @@
               "terminal": {
                 "commands": [
                   {
-                    "title": "Docker",
-                    "command": "docker pull busybox"
+                    "title": "Docker:~~",
+                    "command": "docker pull nigga"
                   },
                   {
-                    "title": "Docker",
+                    "title": "Docker:~~",
                     "command": "docker pull helloworld"
                   }
                 ]
@@ -69,5 +69,6 @@
     },
     { "name": "Landing Zone", "slug": "landing-zone" },
     { "name": "Test", "slug": "test" }
-  ]
+  ],
+  "onboarded": []
 }
