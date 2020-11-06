@@ -40,7 +40,7 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 
 	for _, app := range store.GetApps() {
-		router.HandleFunc(fmt.Sprintf("/%v", strings.ToLower(app.Name)), s.callAppEndpoint)
+		router.HandleFunc(fmt.Sprintf("/%v", strings.ToLower(app.Name)), s.callAppEndpoint).Methods(http.MethodGet)
 	}
 
 	s.Handler = router

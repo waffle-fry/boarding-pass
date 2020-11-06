@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -69,6 +70,23 @@ func TestDashboard(t *testing.T) {
 		got := store.GetApps()
 
 		assertApps(t, got, want)
+		assertStatus(t, response.Code, http.StatusOK)
+	})
+}
+
+func TestWebhooks(t *testing.T) {
+	t.Run("Creates endpoints for webhooks in store", func(t *testing.T) {
+		webhooks := []App{
+			{"test-webhook", "http://www.google.com", map[string]interface{}{"foo": "bar"}},
+		}
+
+		store := &InMemoryStore{webhooks}
+		server := NewServer(store, getConfig())
+
+		request := newGetDashboardRequest(fmt.Sprintf("/%v", webhooks[0].Name))
+		response := httptest.NewRecorder()
+		server.ServeHTTP(response, request)
+
 		assertStatus(t, response.Code, http.StatusOK)
 	})
 }
