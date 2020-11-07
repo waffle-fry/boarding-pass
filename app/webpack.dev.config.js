@@ -69,9 +69,14 @@ module.exports = {
     }),
   ],
   devtool: "cheap-source-map",
+  output: {
+    publicPath: "/",
+  },
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
-    historyApiFallback: true,
+    historyApiFallback: {
+      index: "/",
+    },
     stats: {
       colors: true,
       chunks: false,
