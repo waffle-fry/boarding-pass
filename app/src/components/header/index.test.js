@@ -2,6 +2,9 @@ import React from "react";
 import Header from "./index";
 import { unmountComponentAtNode } from "react-dom";
 import { render } from "@testing-library/react";
+import { find } from "styled-components/test-utils";
+import { Stages } from "./stages";
+import { BrowserRouter as Router } from "react-router-dom";
 
 let container = null;
 beforeEach(() => {
@@ -16,6 +19,11 @@ afterEach(() => {
   container.remove();
   container = null;
 });
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn().mockReturnValue({ team: "quantum-pipes", stage: 1 }),
+}));
 
 test("it renders the logo and title without a subtitle", () => {
   const { getByText } = render(
@@ -35,25 +43,20 @@ test("it renders the logo and title without a subtitle", () => {
   expect(header.childElementCount).toBe(3);
 });
 
-test("it renders the logo and title wit a subtitle", () => {
-  const { getByText } = render(
-    <Header
-      logo="logo-image"
-      title="This is a title"
-      subtitle="This is a subtitle"
-    />,
+test("it renders the stages on the stages screen", () => {
+  render(
+    <Router>
+      <Header
+        logo="logo-image"
+        title="This is a title"
+        currentStage="First Stage"
+        stages={["First Stage", "Second Stage"]}
+      />
+    </Router>,
     container
   );
 
-  const header = document.querySelector(".header");
-  const logo = header.querySelector(".logo");
-  const title = getByText("This is a title");
-  const subtitle = getByText("This is a subtitle");
+  const stages = find(document.body, Stages);
 
-  expect(header).toBeInTheDocument();
-  expect(logo).toBeInTheDocument();
-  expect(title).toBeInTheDocument();
-  expect(subtitle).toBeInTheDocument();
-
-  expect(logo.getAttribute("src")).toBe("logo-image");
+  expect(stages).toBeInTheDocument();
 });

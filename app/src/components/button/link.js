@@ -21,3 +21,5 @@ export default (props) => {
     </Container>
   );
 };
+
+export { StyledLink as LinkButton };

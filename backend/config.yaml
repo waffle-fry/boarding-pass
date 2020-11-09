@@ -11,7 +11,7 @@ teams:
   - name: "Quantum Pipes"
     slug: "quantum-pipes"
     stages:
-      - title: "Step One: Terminal Setup"
+      - title: "Terminal Setup"
         steps:
           - type: "terminal"
             title: "Setup Your Terminal"
@@ -25,7 +25,7 @@ teams:
             action_button:
               enabled: true
               title: "Install All"
-      - title: "Step Two: VPN Access"
+      - title: "VPN Access"
         message:
           title: "CHECK YOUR EMAIL"
           text: "Joe Blogs (joe.blogs@nationwide.co.uk) should have sent you an email with your VPN login details. If not, you’ll need to get in touch with them."

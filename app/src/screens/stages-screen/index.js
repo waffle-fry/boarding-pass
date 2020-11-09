@@ -7,6 +7,7 @@ import StepsList from "../../components/steps-list";
 import Message from "../../components/message";
 import AppContext from "../../contexts/AppContext";
 import LinkButton from "../../components/button/link";
+import _ from "lodash";
 
 function StagesScreen() {
   const appContext = useContext(AppContext);
@@ -16,12 +17,14 @@ function StagesScreen() {
     (teamDetail) => teamDetail.slug == team
   );
   let currentStage = teamDetails.stages[stage - 1];
+  const stages = teamDetails.stages.map((stage) => stage.title);
   return (
     <div className={styles.container}>
       <Header
         logo={appContext.logo}
         title={teamDetails.name}
-        subtitle={currentStage.title}
+        currentStage={currentStage}
+        stages={stages}
       />
       {"message" in currentStage && <Message {...currentStage.message} />}
       <StepsList steps={currentStage.steps} />

@@ -5,6 +5,8 @@ import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 import data from "../../data.json";
+import { find } from "styled-components/test-utils";
+import { LinkButton } from "../../components/button/link";
 
 let container = null;
 beforeEach(() => {
@@ -27,6 +29,14 @@ jest.mock("react-router-dom", () => ({
     .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
     .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
     .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 1 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 2 })
+    .mockReturnValueOnce({ team: "quantum-pipes", stage: 2 })
     .mockReturnValueOnce({ team: "quantum-pipes", stage: 2 }),
 }));
 
@@ -80,8 +90,7 @@ test("it renders the action button", () => {
     container
   );
 
-  const button = document.querySelector("a");
-
+  const button = find(document.body, LinkButton);
   expect(button.getAttribute("href")).toBe("/team/quantum-pipes/2");
 
   expect(button).toBeInTheDocument();
