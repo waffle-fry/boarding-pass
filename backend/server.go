@@ -35,6 +35,7 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/dashboard", s.getDashboard).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks", s.getWebhooks).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks/create", s.getCreateWebhook).Methods(http.MethodGet)
+	router.HandleFunc("/webhooks/edit/{id:[0-9]+}", s.getEditWebhook).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks", s.postCreateWebhook).Methods(http.MethodPost)
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
@@ -90,6 +91,10 @@ func (s *Server) getCreateWebhook(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
 	}
+}
+
+func (s *Server) getEditWebhook(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "ok")
 }
 
 func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
