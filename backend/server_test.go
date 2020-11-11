@@ -35,9 +35,13 @@ func TestDashboard(t *testing.T) {
 			{"/dashboard"},
 			{"/webhooks"},
 			{"/webhooks/create"},
+			{"/webhooks/edit/1"},
 		}
 
-		store := &InMemoryStore{}
+		webhooks := []Webhook{
+			{1, "test-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
+		}
+		store := &InMemoryStore{webhooks}
 		server := NewServer(store, getConfig())
 
 		for _, tt := range endpointTests {
@@ -51,7 +55,7 @@ func TestDashboard(t *testing.T) {
 
 	t.Run("Adds a webhook on form submit", func(t *testing.T) {
 		want := []Webhook{
-			{"test-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
+			{1, "test-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
 		}
 
 		store := &InMemoryStore{}
@@ -77,7 +81,7 @@ func TestDashboard(t *testing.T) {
 func TestWebhooks(t *testing.T) {
 	t.Run("Creates endpoints for webhooks in store", func(t *testing.T) {
 		webhooks := []Webhook{
-			{"test-webhook", "http://www.google.com", map[string]interface{}{"foo": "bar"}},
+			{1, "test-webhook", "http://www.google.com", map[string]interface{}{"foo": "bar"}},
 		}
 
 		store := &InMemoryStore{webhooks}
