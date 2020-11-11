@@ -37,7 +37,7 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/webhooks", s.getWebhooks).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks/create", s.getCreateWebhook).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks/edit/{id:[0-9]+}", s.getEditWebhook).Methods(http.MethodGet)
-	router.HandleFunc("/webhooks/{id:[0-9]+}", s.putUpdateWebhook).Methods(http.MethodPut)
+	router.HandleFunc("/webhooks/{id:[0-9]+}", s.postUpdateWebhook).Methods(http.MethodPost)
 	router.HandleFunc("/webhooks", s.postCreateWebhook).Methods(http.MethodPost)
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
@@ -96,7 +96,19 @@ func (s *Server) getCreateWebhook(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) getEditWebhook(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "ok")
+	idVaraible := mux.Vars(r)["id"]
+	id, err := strconv.Atoi(idVaraible)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
+
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/add_webhook.html"))
+	page := Page{"Edit Webhook", s.store.GetWebhook(id)}
+
+	err = t.Execute(w, page)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
+	}
 }
 
 func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
@@ -126,7 +138,7 @@ func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (s *Server) putUpdateWebhook(w http.ResponseWriter, r *http.Request) {
+func (s *Server) postUpdateWebhook(w http.ResponseWriter, r *http.Request) {
 	idVaraible := mux.Vars(r)["id"]
 	id, err := strconv.Atoi(idVaraible)
 	if err != nil {

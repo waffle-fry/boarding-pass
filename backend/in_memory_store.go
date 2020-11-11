@@ -8,6 +8,10 @@ func (i *InMemoryStore) GetWebhooks() []Webhook {
 	return i.store
 }
 
+func (i *InMemoryStore) GetWebhook(id int) Webhook {
+	return i.store[id-1]
+}
+
 func (i *InMemoryStore) AddWebhook(name, URL string, data map[string]interface{}) {
 	id := len(i.store) + 1
 	webhook := Webhook{id, name, URL, data}

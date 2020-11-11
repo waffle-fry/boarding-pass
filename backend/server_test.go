@@ -93,7 +93,7 @@ func TestDashboard(t *testing.T) {
 		data.Set("url", want[0].URL)
 		data.Set("data", string(dataJSON))
 
-		request := newPutWebhookRequest(want[0].ID, data)
+		request := newPostUpdateWebhookRequest(want[0].ID, data)
 		response := httptest.NewRecorder()
 
 		server.ServeHTTP(response, request)
