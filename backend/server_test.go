@@ -60,7 +60,7 @@ func TestDashboard(t *testing.T) {
 
 		data := url.Values{}
 		data.Set("name", want[0].Name)
-		data.Set("webhookurl", want[0].URL)
+		data.Set("url", want[0].URL)
 		data.Set("data", string(dataJSON))
 
 		request := newPostWebhookRequest(data)
