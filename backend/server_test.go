@@ -50,7 +50,7 @@ func TestDashboard(t *testing.T) {
 	})
 
 	t.Run("Adds a webhook on form submit", func(t *testing.T) {
-		want := []App{
+		want := []Webhook{
 			{"test-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
 		}
 
@@ -60,23 +60,23 @@ func TestDashboard(t *testing.T) {
 
 		data := url.Values{}
 		data.Set("name", want[0].Name)
-		data.Set("webhookurl", want[0].WebhookURL)
+		data.Set("webhookurl", want[0].URL)
 		data.Set("data", string(dataJSON))
 
 		request := newPostWebhookRequest(data)
 		response := httptest.NewRecorder()
 
 		server.ServeHTTP(response, request)
-		got := store.GetApps()
+		got := store.GetWebhooks()
 
-		assertApps(t, got, want)
+		assertWebhooks(t, got, want)
 		assertStatus(t, response.Code, http.StatusOK)
 	})
 }
 
 func TestWebhooks(t *testing.T) {
 	t.Run("Creates endpoints for webhooks in store", func(t *testing.T) {
-		webhooks := []App{
+		webhooks := []Webhook{
 			{"test-webhook", "http://www.google.com", map[string]interface{}{"foo": "bar"}},
 		}
 

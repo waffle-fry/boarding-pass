@@ -39,8 +39,8 @@ func NewServer(store Store, config Config) *Server {
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 
-	for _, app := range store.GetApps() {
-		router.HandleFunc(fmt.Sprintf("/%v", strings.ToLower(app.Name)), s.callAppEndpoint).Methods(http.MethodGet)
+	for _, webhook := range store.GetWebhooks() {
+		router.HandleFunc(fmt.Sprintf("/%v", strings.ToLower(webhook.Name)), s.callWebhookEndpoint).Methods(http.MethodGet)
 	}
 
 	s.Handler = router
@@ -74,7 +74,7 @@ func (s *Server) getDashboard(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) getWebhooks(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
-	page := Page{"Webhooks", s.store.GetApps()}
+	page := Page{"Webhooks", s.store.GetWebhooks()}
 
 	err := t.Execute(w, page)
 	if err != nil {
@@ -99,7 +99,7 @@ func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	name := r.Form.Get("name")
-	webhookURL := r.Form.Get("webhookurl")
+	webhookURL := r.Form.Get("url")
 	dataString := r.Form.Get("data")
 
 	var data map[string]interface{}
@@ -108,10 +108,10 @@ func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, "Please try again")
 	}
 
-	s.store.AddApp(name, webhookURL, data)
+	s.store.AddWebhook(name, webhookURL, data)
 
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
-	page := Page{"Webhooks", s.store.GetApps()}
+	page := Page{"Webhooks", s.store.GetWebhooks()}
 
 	err = t.Execute(w, page)
 	if err != nil {
@@ -123,23 +123,23 @@ func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, http.StatusOK, s.config)
 }
 
-func (s *Server) callAppEndpoint(w http.ResponseWriter, r *http.Request) {
-	apps := s.store.GetApps()
-	var app App
+func (s *Server) callWebhookEndpoint(w http.ResponseWriter, r *http.Request) {
+	webhooks := s.store.GetWebhooks()
+	var webhook Webhook
 
-	for _, appFromStore := range apps {
-		if r.URL.Path == strings.ToLower("/"+appFromStore.Name) {
-			app = appFromStore
+	for _, webhookFromStore := range webhooks {
+		if r.URL.Path == strings.ToLower("/"+webhookFromStore.Name) {
+			webhook = webhookFromStore
 		}
 	}
 
-	requestBody, err := json.Marshal(app.Data)
+	requestBody, err := json.Marshal(webhook.Data)
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	response, err := http.Post(app.WebhookURL, "applcation/json", bytes.NewBuffer(requestBody))
+	response, err := http.Post(webhook.URL, "applcation/json", bytes.NewBuffer(requestBody))
 	if err != nil {
 		log.Fatalln(err)
 	}

@@ -1,14 +1,14 @@
 package main
 
 type InMemoryStore struct {
-	store []App
+	store []Webhook
 }
 
-func (i *InMemoryStore) GetApps() []App {
+func (i *InMemoryStore) GetWebhooks() []Webhook {
 	return i.store
 }
 
-func (i *InMemoryStore) AddApp(name, webhookURL string, data map[string]interface{}) {
-	app := App{name, webhookURL, data}
+func (i *InMemoryStore) AddWebhook(name, webhookURL string, data map[string]interface{}) {
+	app := Webhook{name, webhookURL, data}
 	i.store = append(i.store, app)
 }

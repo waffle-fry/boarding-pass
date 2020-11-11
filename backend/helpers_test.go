@@ -105,10 +105,10 @@ func assertConfig(t *testing.T, got, want Config) {
 	}
 }
 
-func assertApps(t *testing.T, got, want []App) {
+func assertWebhooks(t *testing.T, got, want []Webhook) {
 	t.Helper()
 
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("Apps don't match: got %v, want %v", got, want)
+		t.Errorf("Webhooks don't match: got %v, want %v", got, want)
 	}
 }
