@@ -60,14 +60,40 @@ func TestDashboard(t *testing.T) {
 
 		store := &InMemoryStore{}
 		server := NewServer(store, getConfig())
-		dataJSON, _ := json.Marshal(want[0].Data)
 
 		data := url.Values{}
+		dataJSON, _ := json.Marshal(want[0].Data)
 		data.Set("name", want[0].Name)
 		data.Set("url", want[0].URL)
 		data.Set("data", string(dataJSON))
 
 		request := newPostWebhookRequest(data)
+		response := httptest.NewRecorder()
+
+		server.ServeHTTP(response, request)
+		got := store.GetWebhooks()
+
+		assertWebhooks(t, got, want)
+		assertStatus(t, response.Code, http.StatusOK)
+	})
+
+	t.Run("Edits a webhook on form submit", func(t *testing.T) {
+		webhooks := []Webhook{
+			{1, "test-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
+		}
+		want := []Webhook{
+			{1, "edited-webhook", "webhookurledited.com", map[string]interface{}{"fizz": "buzz"}},
+		}
+		store := &InMemoryStore{webhooks}
+		server := NewServer(store, getConfig())
+
+		data := url.Values{}
+		dataJSON, _ := json.Marshal(want[0].Data)
+		data.Set("name", want[0].Name)
+		data.Set("url", want[0].URL)
+		data.Set("data", string(dataJSON))
+
+		request := newPutWebhookRequest(want[0].ID, data)
 		response := httptest.NewRecorder()
 
 		server.ServeHTTP(response, request)
