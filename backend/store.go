@@ -4,4 +4,5 @@ package main
 type Store interface {
 	GetWebhooks() []Webhook
 	AddWebhook(name, webhookURL string, data map[string]interface{})
+	EditWebhook(id int, name, webhookURL string, data map[string]interface{})
 }

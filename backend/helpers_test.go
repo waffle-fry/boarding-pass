@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -57,6 +58,13 @@ func newGetDashboardRequest(endpoint string) *http.Request {
 
 func newPostWebhookRequest(data url.Values) *http.Request {
 	request, _ := http.NewRequest(http.MethodPost, "/webhooks", strings.NewReader(data.Encode()))
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	return request
+}
+
+func newPutWebhookRequest(id int, data url.Values) *http.Request {
+	request, _ := http.NewRequest(http.MethodPut, fmt.Sprintf("/webhooks/%v", id), strings.NewReader(data.Encode()))
 	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	return request

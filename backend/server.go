@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -36,6 +37,7 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/webhooks", s.getWebhooks).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks/create", s.getCreateWebhook).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks/edit/{id:[0-9]+}", s.getEditWebhook).Methods(http.MethodGet)
+	router.HandleFunc("/webhooks/{id:[0-9]+}", s.putUpdateWebhook).Methods(http.MethodPut)
 	router.HandleFunc("/webhooks", s.postCreateWebhook).Methods(http.MethodPost)
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
@@ -104,7 +106,7 @@ func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	name := r.Form.Get("name")
-	webhookURL := r.Form.Get("url")
+	url := r.Form.Get("url")
 	dataString := r.Form.Get("data")
 
 	var data map[string]interface{}
@@ -113,7 +115,40 @@ func (s *Server) postCreateWebhook(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, "Please try again")
 	}
 
-	s.store.AddWebhook(name, webhookURL, data)
+	s.store.AddWebhook(name, url, data)
+
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
+	page := Page{"Webhooks", s.store.GetWebhooks()}
+
+	err = t.Execute(w, page)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
+	}
+}
+
+func (s *Server) putUpdateWebhook(w http.ResponseWriter, r *http.Request) {
+	idVaraible := mux.Vars(r)["id"]
+	id, err := strconv.Atoi(idVaraible)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
+
+	err = r.ParseForm()
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
+
+	name := r.Form.Get("name")
+	url := r.Form.Get("url")
+	dataString := r.Form.Get("data")
+
+	var data map[string]interface{}
+	err = json.Unmarshal([]byte(dataString), &data)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
+
+	s.store.EditWebhook(id, name, url, data)
 
 	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhooks.html"))
 	page := Page{"Webhooks", s.store.GetWebhooks()}
