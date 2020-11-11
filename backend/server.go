@@ -86,7 +86,7 @@ func (s *Server) getWebhooks(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) getCreateWebhook(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/add_webhook.html"))
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhook_form.html"))
 	page := Page{"Add Webhook", nil}
 
 	err := t.Execute(w, page)
@@ -102,7 +102,7 @@ func (s *Server) getEditWebhook(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, "Please try again")
 	}
 
-	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/add_webhook.html"))
+	t := template.Must(template.ParseFiles("layout/template.html", "layout/header.html", "layout/webhook_form.html"))
 	page := Page{"Edit Webhook", s.store.GetWebhook(id)}
 
 	err = t.Execute(w, page)
