@@ -181,7 +181,7 @@ func (s *Server) getDeleteWebhook(w http.ResponseWriter, r *http.Request) {
 
 	s.store.DeleteWebhook(id)
 
-	http.Redirect(w, r, "/webhooks", http.StatusNoContent)
+	http.Redirect(w, r, "/webhooks", http.StatusSeeOther)
 }
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {

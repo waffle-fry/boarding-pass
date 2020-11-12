@@ -121,7 +121,7 @@ func TestDashboard(t *testing.T) {
 		got := store.GetWebhooks()
 
 		assertWebhooks(t, got, want)
-		assertStatus(t, response.Code, http.StatusNoContent)
+		assertStatus(t, response.Code, http.StatusSeeOther)
 	})
 }
 
