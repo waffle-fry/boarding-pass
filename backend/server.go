@@ -39,6 +39,7 @@ func NewServer(store Store, config Config) *Server {
 	router.HandleFunc("/webhooks/edit/{id:[0-9]+}", s.getEditWebhook).Methods(http.MethodGet)
 	router.HandleFunc("/webhooks/{id:[0-9]+}", s.postUpdateWebhook).Methods(http.MethodPost)
 	router.HandleFunc("/webhooks", s.postCreateWebhook).Methods(http.MethodPost)
+	router.HandleFunc("/webhooks/delete/{id:[0-9]+}", s.getDeleteWebhook).Methods(http.MethodGet)
 	router.PathPrefix("/resources/").Handler(http.StripPrefix("/resources/", http.FileServer(http.Dir("resources/"))))
 	router.HandleFunc("/config", s.getConfig).Methods(http.MethodGet)
 
@@ -169,6 +170,18 @@ func (s *Server) postUpdateWebhook(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "There was a problem loading this page")
 	}
+}
+
+func (s *Server) getDeleteWebhook(w http.ResponseWriter, r *http.Request) {
+	idVaraible := mux.Vars(r)["id"]
+	id, err := strconv.Atoi(idVaraible)
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, "Please try again")
+	}
+
+	s.store.DeleteWebhook(id)
+
+	http.Redirect(w, r, "/webhooks", http.StatusNoContent)
 }
 
 func (s *Server) getConfig(w http.ResponseWriter, r *http.Request) {

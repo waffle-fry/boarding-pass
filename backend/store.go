@@ -6,4 +6,5 @@ type Store interface {
 	GetWebhook(id int) Webhook
 	AddWebhook(name, webhookURL string, data map[string]interface{})
 	EditWebhook(id int, name, webhookURL string, data map[string]interface{})
+	DeleteWebhook(id int)
 }

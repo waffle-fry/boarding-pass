@@ -70,6 +70,11 @@ func newPostUpdateWebhookRequest(id int, data url.Values) *http.Request {
 	return request
 }
 
+func newGetDeleteWebhookRequest(id int) *http.Request {
+	request, _ := http.NewRequest(http.MethodGet, fmt.Sprintf("/webhooks/delete/%v", id), nil)
+	return request
+}
+
 //
 // Convert Responses
 //

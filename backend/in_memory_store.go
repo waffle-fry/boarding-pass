@@ -23,3 +23,11 @@ func (i *InMemoryStore) EditWebhook(id int, name, URL string, data map[string]in
 	i.store[id-1].URL = URL
 	i.store[id-1].Data = data
 }
+
+func (i *InMemoryStore) DeleteWebhook(id int) {
+	x := id - 1
+
+	newStore := make([]Webhook, 0)
+	newStore = append(newStore, i.store[:x]...)
+	i.store = append(newStore, i.store[x+1:]...)
+}
