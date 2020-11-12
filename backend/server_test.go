@@ -102,6 +102,27 @@ func TestDashboard(t *testing.T) {
 		assertWebhooks(t, got, want)
 		assertStatus(t, response.Code, http.StatusOK)
 	})
+
+	t.Run("Deletes a webhook on link click", func(t *testing.T) {
+		webhooks := []Webhook{
+			{1, "test-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
+			{2, "another-webhook", "webhookurl.com", map[string]interface{}{"foo": "bar"}},
+		}
+		want := []Webhook{
+			{webhooks[1].ID, webhooks[1].Name, webhooks[1].URL, webhooks[1].Data},
+		}
+		store := &InMemoryStore{webhooks}
+		server := NewServer(store, getConfig())
+
+		request := newGetDeleteWebhookRequest(webhooks[0].ID)
+		response := httptest.NewRecorder()
+
+		server.ServeHTTP(response, request)
+		got := store.GetWebhooks()
+
+		assertWebhooks(t, got, want)
+		assertStatus(t, response.Code, http.StatusNoContent)
+	})
 }
 
 func TestWebhooks(t *testing.T) {
