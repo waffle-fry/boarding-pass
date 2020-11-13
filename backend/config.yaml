@@ -44,4 +44,3 @@ teams:
   - name: "Test"
     slug: "test"
 onboarded:
-  - slack
