@@ -14,28 +14,23 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ^1.14.0
-      - uses: technote-space/get-diff-action@v3
-        with:
-          PATTERNS: "backend/**"
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
+      - uses: marceloprado/has-changed-path@v1
+        id: changed
+        with:
+          paths: backend
+
       - name: Get dependencies
-        if: env.GIT_DIFF
         run: |
           go get -v -t -d ./...
           if [ -f Gopkg.toml ]; then
               curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
               dep ensure
           fi
-
-      - name: Lint
-        if: env.GIT_DIFF
-        uses: golangci/golangci-lint-action@v1
-        with:
-          version: v1.29
 
   vet:
     name: Vet
@@ -45,16 +40,18 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ^1.14.0
-      - uses: technote-space/get-diff-action@v3
-        with:
-          PATTERNS: "backend/**"
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
+      - uses: marceloprado/has-changed-path@v1
+        id: changed
+        with:
+          paths: backend
+
       - name: Get dependencies
-        if: env.GIT_DIFF
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd backend
           go get -v -t -d ./...
@@ -64,7 +61,7 @@ jobs:
           fi
 
       - name: Vet
-        if: env.GIT_DIFF
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd backend
           go vet .
@@ -77,16 +74,18 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ^1.14.0
-      - uses: technote-space/get-diff-action@v3
-        with:
-          PATTERNS: "backend/**"
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
+      - uses: marceloprado/has-changed-path@v1
+        id: changed
+        with:
+          paths: backend
+
       - name: Get dependencies
-        if: env.GIT_DIFF
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd backend
           go get -v -t -d ./...
@@ -96,7 +95,7 @@ jobs:
           fi
 
       - name: Test
-        if: env.GIT_DIFF
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd backend
           go test -v .
@@ -109,16 +108,18 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ^1.14.0
-    - uses: technote-space/get-diff-action@v3
-      with:
-        PATTERNS: "backend/**"
       id: go
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
+    - uses: marceloprado/has-changed-path@v1
+      id: changed
+      with:
+        paths: backend
+
     - name: Get dependencies
-      if: env.GIT_DIFF
+      if: steps.changed.outputs.changed == 'true'
       run: |
         cd backend
         go get -v -t -d ./...
@@ -128,7 +129,7 @@ jobs:
         fi
 
     - name: Build
-      if: env.GIT_DIFF
+      if: steps.changed.outputs.changed == 'true'
       run: |
         cd backend
         go build -v .
