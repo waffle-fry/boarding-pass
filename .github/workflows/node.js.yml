@@ -20,11 +20,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: technote-space/get-diff-action@v3
+      - uses: technote-space/get-diff-action@v4
         with:
           PATTERNS: |
             +(app)/**
-          
 
       - name: CI
         if: env.GIT_DIFF
