@@ -1,9 +1,9 @@
-name: Node.js CI (develop-v0.2)
+name: Node.js CI
 
 on:
-  push:
+  pull_request:
     branches:
-      - "develop-v0.2"
+      - "develop"
     paths:
       - "app/**"
 

@@ -1,9 +1,9 @@
-name: Go (develop-v0.2)
+name: Go
 
 on:
-  push:
+  pull_request:
     branches:
-      - "develop-v0.2"
+      - "develop"
     paths:
       - "backend/**"
 
