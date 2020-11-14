@@ -8,13 +8,14 @@ import Message from "../../components/message";
 import AppContext from "../../contexts/AppContext";
 import LinkButton from "../../components/button/link";
 import _ from "lodash";
+import urlSlug from "url-slug";
 
 function StagesScreen() {
   const appContext = useContext(AppContext);
 
   let { team, stage } = useParams();
   let teamDetails = appContext.teams.find(
-    (teamDetail) => teamDetail.slug == team
+    (teamDetail) => urlSlug(teamDetail.name) == team
   );
   let currentStage = teamDetails.stages[stage - 1];
   const stages = teamDetails.stages.map((stage) => stage.title);
