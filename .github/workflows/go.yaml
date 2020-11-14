@@ -109,30 +109,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go 1.x
-      - uses: actions/setup-go@v2
-        with:
-          go-version: ^1.14.0
-      - uses: technote-space/get-diff-action@v3
-        with:
-          PATTERNS: "backend/**"
-        id: go
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.14.0
+    - uses: technote-space/get-diff-action@v3
+      with:
+        PATTERNS: "backend/**"
+      id: go
 
-      - name: Check out code into the Go module directory
-        uses: actions/checkout@v2
-        if: env.GIT_DIFF
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+      if: env.GIT_DIFF
 
-      - name: Get dependencies
-        if: env.GIT_DIFF
-        run: |
-          cd backend
-          go get -v -t -d ./...
-          if [ -f Gopkg.toml ]; then
-              curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-              dep ensure
-          fi
+    - name: Get dependencies
+      if: env.GIT_DIFF
+      run: |
+        cd backend
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi
 
-      - name: Build
-        if: env.GIT_DIFF
-        run: |
-          cd backend
-          go build -v .
+    - name: Build
+      if: env.GIT_DIFF
+      run: |
+        cd backend
+        go build -v .

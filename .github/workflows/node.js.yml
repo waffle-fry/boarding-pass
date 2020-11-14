@@ -16,13 +16,13 @@ jobs:
 
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node-version }}
-        - uses: technote-space/get-diff-action@v3
-          with:
-            PATTERNS: "app/**"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: technote-space/get-diff-action@v3
+        with:
+          PATTERNS: "app/**"
 
       - name: CI
         if: env.GIT_DIFF
