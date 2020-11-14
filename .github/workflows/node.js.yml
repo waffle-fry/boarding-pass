@@ -23,7 +23,7 @@ jobs:
       - uses: technote-space/get-diff-action@v4
         with:
           PATTERNS: |
-            app/**
+            /app/*
 
       - name: CI
         if: env.GIT_DIFF
