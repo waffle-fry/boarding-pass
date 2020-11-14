@@ -65,7 +65,6 @@ The file expects the following:
 | Item   | Type   | Description                                                             |
 | ------ | ------ | ----------------------------------------------------------------------- |
 | name   | String | The name of the team                                                    |
-| slug   | String | The name of the team without spaces                                     |
 | stages | Array  | Each stage that a new employee must progress through (see Stages below) |
 
 ### Stages
