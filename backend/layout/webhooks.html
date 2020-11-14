@@ -1,0 +1,34 @@
+{{define "content"}}
+  <link rel="stylesheet" type="text/css" href="/resources/webhooks.css">
+  <div class="header">
+    <h1 class="title">Webhooks</h1>
+    <a href="/webhooks/create">
+      <button class="button is-primary">
+        <span class="icon">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span>Add Webhook</span>
+      </button>
+    </a>
+  </div>
+  <table class="table is-striped is-fullwidth">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>URL</th>
+        <th>Data</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .}}
+        <tr class="has-text-centered">
+          <td>{{.Name}}</td>
+          <td>{{.URL}}</td>
+          <td>{{.Data}}</td>
+          <td><a href="/webhooks/edit/{{.ID}}">Edit</a> | <a href="/webhooks/delete/{{.ID}}">Delete</a></td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+{{end}}

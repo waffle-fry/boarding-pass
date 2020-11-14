@@ -1,0 +1,43 @@
+{{define "content"}}
+  <link rel="stylesheet" type="text/css" href="/resources/webhooks.css">
+  {{if .Name}}
+  <h1 class="title">Edit Webhook</h1>
+  {{else}}
+  <h1 class="title">Add Webhook</h1>
+  {{end}}
+  <form method="POST">
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" value="{{if .Name}}{{.Name}}{{end}}" name="name" type="text" placeholder="Webhook Name">
+      </div>
+    </div>
+  
+    <div class="field">
+      <label class="label">URL</label>
+      <div class="control">
+        <input class="input" value="{{if .URL}}{{.URL}}{{end}}" name="url" type="text" placeholder="Webhook URL">
+      </div>
+    </div>
+  
+    <div class="field">
+      <label class="label">Data</label>
+      <div class="control">
+        <textarea class="textarea" name="data" placeholder="The data sent with the Webhook (in JSON)">{{if .Data}}{{.Data}}{{end}}</textarea>
+      </div>
+    </div>
+
+    <div class="field is-grouped is-grouped-right">
+      {{if .Name}}
+        <button class="button is-primary" formaction="/webhooks/{{.ID}}">
+      {{else}}
+        <button class="button is-primary" formaction="/webhooks">
+      {{end}}
+        <span class="icon">
+          <i class="fas fa-save"></i>
+        </span>
+        <span>Save</span>
+      </button>
+    </div>
+  </form>
+{{end}}

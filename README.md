@@ -9,12 +9,22 @@ As it stands, the app is both incomplete and very minimal. While it can't curren
 ## Prerequisits
 
 You'll need NPM for this.
+And Go, you'll need Go.
 
 ## Running the app
 
+Note: The app will serve on port 5000 by default. The application expects the backend to serve from localhost:5000 - this can be changed in the configurl.js file; the port on which the backend serves can be updated in the main.go file.
+
 ```bash
 cd boarding-pass
-npm install #if it's your first time
+
+# To run the backend
+cd backend
+go run .
+
+# To run the app
+cd app
+npm install # If it's your first time
 npm start
 ```
 
@@ -22,12 +32,22 @@ npm start
 
 ```bash
 cd boarding-pass
-npm run test
+
+# Backend
+cd backend
+go test
+
+# App
+cd app
+npm test
 ```
 
 ## The config file
 
-The config file is currently setup as JSON. It expects the following:
+The onboarding config should be defined within a YAML file.
+The file should be named "config.yaml" and placed within the backend folder; it will be served at the /config endpoint.
+
+The file expects the following:
 
 | Item             | Type   | Description                                                                                 |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------- |
@@ -67,13 +87,13 @@ The config file is currently setup as JSON. It expects the following:
 
 ### Step Types
 
-| Name        | Terminal                                       | Action Button                        |
-| ----------- | ---------------------------------------------- | ------------------------------------ |
-| terminal    | Y - {"commands": ["title": "", "command": ""]} | Y - runs specified terminal commands |
-| download    | X                                              | X                                    |
-| open-folder | X                                              | X                                    |
-| text-input  | X                                              | X                                    |
-| account     | X                                              | X                                    |
-| jira        | X                                              | X                                    |
-| github      | X                                              | X                                    |
-| aws         | X                                              | X                                    |
+| Name        | Terminal                             | Action Button                        |
+| ----------- | ------------------------------------ | ------------------------------------ |
+| terminal    | Y: commands: - title: "" command: "" | Y - runs specified terminal commands |
+| download    | X                                    | X                                    |
+| open-folder | X                                    | X                                    |
+| text-input  | X                                    | X                                    |
+| account     | X                                    | X                                    |
+| jira        | X                                    | X                                    |
+| github      | X                                    | X                                    |
+| aws         | X                                    | X                                    |
