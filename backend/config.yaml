@@ -7,9 +7,7 @@ primary_colour: "#004A8F"
 secondary_colour: "#EC1C24"
 teams:
   - name: "Izumi"
-    slug: "izumi"
   - name: "Quantum Pipes"
-    slug: "quantum-pipes"
     stages:
       - title: "Terminal Setup"
         steps:
@@ -40,7 +38,5 @@ teams:
             title: "Connect with the profile"
             text: "You’ll be prompted to enter the username and password you’ve been emailed - be sure to tick “save in keychain”."
   - name: "Landing Zone"
-    slug: "landing-zone"
   - name: "Test"
-    slug: "test"
 onboarded:
