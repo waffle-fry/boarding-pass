@@ -22,8 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: technote-space/get-diff-action@v3
         with:
-          PREFIX_FILTER: |
-            app
+          PATTERNS: |
+            +(app)/**
           
 
       - name: CI
