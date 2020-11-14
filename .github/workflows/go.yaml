@@ -4,8 +4,6 @@ on:
   pull_request:
     branches:
       - "develop"
-    paths:
-      - "backend/**"
 
 jobs:
   lint:
@@ -13,15 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
-        with:
-          go-version: ^1.14.0
-        id: go
+        - uses: actions/setup-go@v2
+        - uses: technote-space/get-diff-action@v3
+          with:
+            go-version: ^1.14.0
+            PATTERNS: "backend/**"
+          id: go
 
       - name: Check out code into the Go module directory
+        if: env.GIT_DIFF
         uses: actions/checkout@v2
 
       - name: Get dependencies
+        if: env.GIT_DIFF
         run: |
           go get -v -t -d ./...
           if [ -f Gopkg.toml ]; then
@@ -30,6 +32,7 @@ jobs:
           fi
 
       - name: Lint
+        if: env.GIT_DIFF
         uses: golangci/golangci-lint-action@v1
         with:
           version: v1.29
@@ -39,15 +42,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+        - uses: actions/setup-go@v2
+        - uses: technote-space/get-diff-action@v3
         with:
           go-version: ^1.14.0
+          PATTERNS: "backend/**"
         id: go
 
       - name: Check out code into the Go module directory
+        if: env.GIT_DIFF
         uses: actions/checkout@v2
 
       - name: Get dependencies
+        if: env.GIT_DIFF
         run: |
           cd backend
           go get -v -t -d ./...
@@ -57,6 +64,7 @@ jobs:
           fi
 
       - name: Vet
+        if: env.GIT_DIFF
         run: |
           cd backend
           go vet .
@@ -66,15 +74,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+        - uses: actions/setup-go@v2
+        - uses: technote-space/get-diff-action@v3
         with:
           go-version: ^1.14.0
+          PATTERNS: "backend/**"
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+        if: env.GIT_DIFF
 
       - name: Get dependencies
+        if: env.GIT_DIFF
         run: |
           cd backend
           go get -v -t -d ./...
@@ -84,6 +96,7 @@ jobs:
           fi
 
       - name: Test
+        if: env.GIT_DIFF
         run: |
           cd backend
           go test -v .
@@ -93,15 +106,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+        - uses: actions/setup-go@v2
+        - uses: technote-space/get-diff-action@v3
         with:
           go-version: ^1.14.0
+          PATTERNS: "backend/**"
         id: go
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+        if: env.GIT_DIFF
 
       - name: Get dependencies
+        if: env.GIT_DIFF
         run: |
           cd backend
           go get -v -t -d ./...
@@ -111,6 +128,7 @@ jobs:
           fi
 
       - name: Build
+        if: env.GIT_DIFF
         run: |
           cd backend
           go build -v .
