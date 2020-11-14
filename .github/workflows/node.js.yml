@@ -21,27 +21,26 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          
-      - uses: technote-space/get-diff-action@v4
-        id: git-diff
+
+      - uses: marceloprado/has-changed-path@v1
+        id: changed
         with:
-          PREFIX_FILTER: |
-            /app/*
+          paths: app
 
       - name: CI
-        if: steps.git-diff.outputs.diff
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd app
           npm ci
 
       - name: Test
-        if: steps.git-diff.outputs.diff
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd app
           npm test
 
       - name: Build
-        if: steps.git-diff.outputs.diff
+        if: steps.changed.outputs.changed == 'true'
         run: |
           cd app
           npm run build --if-present
