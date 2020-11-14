@@ -12,10 +12,9 @@ jobs:
     steps:
       - name: Set up Go 1.x
       - uses: actions/setup-go@v2
-        with:
-          go-version: ^1.14.0
       - uses: technote-space/get-diff-action@v3
         with:
+          go-version: ^1.14.0
           PATTERNS: "backend/**"
         id: go
 
@@ -44,10 +43,9 @@ jobs:
     steps:
       - name: Set up Go 1.x
       - uses: actions/setup-go@v2
-        with:
-          go-version: ^1.14.0
       - uses: technote-space/get-diff-action@v3
         with:
+          go-version: ^1.14.0
           PATTERNS: "backend/**"
         id: go
 
@@ -77,10 +75,9 @@ jobs:
     steps:
       - name: Set up Go 1.x
       - uses: actions/setup-go@v2
-        with:
-          go-version: ^1.14.0
       - uses: technote-space/get-diff-action@v3
         with:
+          go-version: ^1.14.0
           PATTERNS: "backend/**"
         id: go
 
@@ -110,10 +107,9 @@ jobs:
     steps:
     - name: Set up Go 1.x
     - uses: actions/setup-go@v2
-      with:
-        go-version: ^1.14.0
     - uses: technote-space/get-diff-action@v3
       with:
+        go-version: ^1.14.0
         PATTERNS: "backend/**"
       id: go
 
